@@ -1,0 +1,97 @@
+<!--<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="500px" fxFlex.xs="100%">
+      <mat-card-title>Create a new owner</mat-card-title>
+<form [formGroup]="ownerForm" autocomplete="off" novalidate (ngSubmit)="createOwner(ownerForm.value)" fxLayout="column wrap"
+      fxLayoutAlign="center center" fxLayoutGap="10px">
+  <mat-card-content>
+<mat-form-field>
+  <input matInput type="text" placeholder="Owner's name" formControlName="name" id="name">
+  <mat-hint fxLayoutAlign="end">Not more then 60 characters long.</mat-hint>
+  <mat-error *ngIf="hasError('name', 'required')">Name is required</mat-error>
+  <mat-error *ngIf="hasError('name', 'maxlength')">You have more than 60 characters</mat-error>
+</mat-form-field>
+ 
+<mat-form-field>
+  <input matInput [matDatepicker]="picker" placeholder="Choose a date of birth" formControlName="dateOfBirth" id="dateOfBirth" 
+      readonly (click)="picker.open()">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+ 
+<mat-form-field>
+  <input matInput type="text" placeholder="Owner's address" formControlName="address">
+  <mat-hint fxLayoutAlign="end">Not more then 100 characters long.</mat-hint>
+  <mat-error *ngIf="hasError('address', 'required')">Address is required</mat-error>
+  <mat-error *ngIf="hasError('address', 'maxlength')">You have more than 100 characters</mat-error>
+</mat-form-field>
+  </mat-card-content>
+<mat-card-actions fxLayoutAlign="center">
+  <button mat-raised-button color="primary" [disabled]="!ownerForm.valid">Create</button>
+  <button type="button" mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+</mat-card-actions>
+</form>
+    </mat-card>
+</section>-->
+
+<form [formGroup]="service.form" class="normal-form">
+    <div fxAlign="center">
+       <br> <h2>Add a Device</h2>
+    </div>
+    <mat-grid-list cols="2" rowHeight="300px">
+        <mat-grid-tile>
+            <div class="controles-container">
+                    <input type="hidden" formControlName="$key">
+                    <mat-form-field>
+                       <input formControlName="barcode" matInput placeholder="Device Barcode*">
+                       <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                            <input formControlName="name" matInput placeholder="Device Name*">
+                            <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input formControlName="addDate" matInput [matDatepicker]="picker" placeholder="Date*">
+                        <mat-error>This field is mandatory.</mat-error>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field>
+                            <mat-select formControlName="condition" placeholder="Device Condition*">
+                                <ng-container *ngFor="let condition of deviceCondition">
+                                    <mat-option value="{{condition.id}}">{{condition.value}}</mat-option>
+                                </ng-container>
+                            </mat-select>
+                            <mat-error>This field is mandatory.</mat-error>
+                        </mat-form-field>
+                    
+            </div>   
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div class="controles-container">
+                    
+                        <div class="add-bottom-padding">
+                            <label>Device Status* :</label>
+                            <mat-radio-group formControlName="status">
+                                <mat-radio-button value='1' color="primary">Unassigned</mat-radio-button>
+                                <mat-radio-button value='2' color="primary">Assigned</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <!--<mat-form-field>
+                                <mat-select formControlName="status" placeholder="Device Status">
+                                    <ng-container *ngFor="let status of deviceStatus">
+                                        <mat-option value="{{status.id}}">{{status.value}}</mat-option>
+                                    </ng-container>
+                                </mat-select>
+                            </mat-form-field>-->
+                        <div style="margin-top:25px;">
+                            <label>Upload an Image :&nbsp;&nbsp;&nbsp;</label>
+                            <button mat-raised-button color="basic" type="submit">Choose Image</button>
+                        </div>
+                        <div class="button-row">
+                            <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid">Submit</button>
+                            <button mat-raised-button color="warn" type="submit" (click)="onClear()">Clear</button>
+                        </div>    
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</form>

@@ -1,0 +1,51 @@
+/*table {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    min-width: 500px;
+}
+ 
+th.mat-header-cell {
+    text-align: left;
+    max-width: 300px;
+}*/
+
+/* Structure */
+
+mat-form-field{
+    width: 400px;
+}
+mat-card-title{
+    text-align: center;
+}
+
+form.normal-form{
+   margin-left:18%;
+   margin-right:10%;
+}
+
+.controle-container{
+    width: 60px;
+    padding:10%;
+}
+
+.controle-container>  * { 
+    width: 60px;
+}
+
+.add-bottom-padding{
+    padding-bottom: 10px;
+}
+
+mat-radio-group mat-radio-button{
+    margin-left:10px;
+}
+
+label{
+    color:grey;
+}
+
+.button-row button{
+    margin-left:7px;
+    margin-top:18%;
+}
