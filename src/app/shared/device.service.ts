@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+//import { HttpClient, HttpHeaders } from '@angular/common/http';
+//import { environment } from 'src/environments/environment';
 import { FormGroup,FormControl,Validators} from "@angular/forms";
+import {AngularFireDatabase,AngularFireList} from 'angularfire2/database';
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DeviceService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private firebase:AngularFireDatabase,private datePipe: DatePipe) { }
+
+  deviceList: AngularFireList<any>;
 
   form: FormGroup = new FormGroup({
     $key:new FormControl(null),
@@ -16,7 +20,7 @@ export class DeviceService {
     name:new FormControl('',Validators.required),
     addDate: new FormControl('',Validators.required),
     condition:new FormControl(0,Validators.required),
-    status:new FormControl('1')
+    status:new FormControl('Unassigned')
   });
 
   initializeFormGroup(){
@@ -26,33 +30,36 @@ export class DeviceService {
       name:'',
       addDate: '',
       condition:0,
-      status:'1'
+      status:'Unassigned'
     })
   }
 
-  /*public getData = (route: string) => {
-    return this.http.get(this.createCompleteRoute(route, environment.urlAddress));
+  getDevices(){
+    this.deviceList = this.firebase.list('devices');
+    return this.deviceList.snapshotChanges();
   }
- 
-  public create = (route: string, body) => {
-    return this.http.post(this.createCompleteRoute(route, environment.urlAddress), body, this.generateHeaders());
+
+  addDevice(device){
+    this.deviceList.push({
+      barcode:device.barcode,
+      name:device.name,
+      addDate:device.addDate == "" ? "" : this.datePipe.transform(device.hireDate, 'yyyy-MM-dd'),
+      condition:device.condition,
+      status:device.status
+    });
   }
- 
-  public update = (route: string, body) => {
-    return this.http.put(this.createCompleteRoute(route, environment.urlAddress), body, this.generateHeaders());
+
+  updateDevice(device){
+    this.deviceList.update(device.$key,{
+      barcode:device.barcode,
+      name:device.name,
+      addDate:device.addDate== "" ? "" : this.datePipe.transform(device.hireDate, 'yyyy-MM-dd'),
+      condition:device.condition,
+      status:device.status
+    });
   }
- 
-  public delete = (route: string) => {
-    return this.http.delete(this.createCompleteRoute(route, environment.urlAddress));
+
+  deleteDevice($key: string){
+      this.deviceList.remove($key);
   }
- 
-  private createCompleteRoute = (route: string, envAddress: string) => {
-    return `${envAddress}/${route}`;
-  }
- 
-  private generateHeaders = () => {
-    return {
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
-    }
-  }*/
 }

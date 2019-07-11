@@ -24,7 +24,12 @@ import * as Material from "@angular/material";
     Material.MatRadioModule,
     Material.MatSelectModule,
     Material.MatNativeDateModule,
-    Material.MatButtonModule
+    Material.MatButtonModule,
+    Material.MatSnackBarModule,
+    Material.MatTooltipModule,
+    Material.MatPaginatorModule,
+    Material.MatSortModule,
+    Material.MatDialogModule
   ],
   exports:[
     CommonModule,
@@ -43,7 +48,12 @@ import * as Material from "@angular/material";
     Material.MatRadioModule,
     Material.MatSelectModule,
     Material.MatNativeDateModule,
-    Material.MatButtonModule
+    Material.MatButtonModule,
+    Material.MatSnackBarModule,
+    Material.MatTooltipModule,
+    Material.MatPaginatorModule,
+    Material.MatSortModule,
+    Material.MatDialogModule
   ]
 })
 export class MaterialModule { }

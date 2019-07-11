@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {AngularFireDatabase} from 'angularfire2/database';
 import {DeviceService} from '../shared/device.service';
+import {NotificationService } from '../shared/notification.service';
+import {MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-add-device',
@@ -10,7 +11,9 @@ import {DeviceService} from '../shared/device.service';
 export class AddDeviceComponent implements OnInit {
 
   devices:any[];
-  constructor(private service:DeviceService) { 
+  constructor(private service:DeviceService,
+    private notificationService:NotificationService,
+    public dialogRef:MatDialogRef<AddDeviceComponent>) { 
   }
 
   deviceCondition = [
@@ -25,11 +28,28 @@ export class AddDeviceComponent implements OnInit {
   ]
 
   ngOnInit() {
+    this.service.getDevices();
   }
 
   onClear(){
     this.service.form.reset();
     this.service.initializeFormGroup();
+  }
+
+  onSubmit(){
+    if(this.service.form.valid){
+      this.service.addDevice(this.service.form.value);
+      this.service.form.reset();
+      this.service.initializeFormGroup();
+      this.notificationService.success('Device added successfully !');
+      this.onClose();
+    }
+  }
+
+  onClose(){
+    this.service.form.reset();
+    this.service.initializeFormGroup();
+    this.dialogRef.close();
   }
 
 }

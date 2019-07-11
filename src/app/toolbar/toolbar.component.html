@@ -1,24 +1,11 @@
 
-<!--<mat-toolbar color="warn">
-        <mat-toolbar-row>
-          <button mat-icon-button>
-            <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
-          </button>
-          
-          <span class="menu-spacer"></span>
-          <div class="toolbuttons">
-            
-            
-          </div>
-        </mat-toolbar-row>
-      </mat-toolbar>-->
 
-      <mat-toolbar color="primary">
-        <button mat-icon-button>
+      <mat-toolbar style="background-color: darkblue">
+        <button mat-icon-button style="color:white">
           <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
         </button>
-        <h1>&nbsp;&nbsp;&nbsp;&nbsp;AppX Device Manager</h1>
-        <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
+        <h1 style="color:white">&nbsp;&nbsp;&nbsp;&nbsp;AppX Device Manager</h1>
+        <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs style="color:white;font-weight:bold">
             <ul fxLayout fxLayoutGap="10px" class="navigation-items">
                 <li>
                   <a mat-button [routerLink]="'/user-home'">UserName</a>
@@ -39,6 +26,7 @@
                 <a mat-list-item [routerLink]="'/add-user'" (click)='sidenav.Close()'> Add User </a>
                 <a mat-list-item [routerLink]="'/add-device'" (click)='sidenav.Close()'> Add Device </a>
                 <a mat-list-item [routerLink]="'/assign-device'" (click)='sidenav.Close()'> Assign Device </a>
+                <a mat-list-item [routerLink]="'/device-list'" (click)='sidenav.Close()'> View Devices </a>
                 <!--<a mat-list-item [routerLink]="'/'"> Devices </a>
                 <a mat-list-item [routerLink]="'/'"> Assigned History</a>
                 <a mat-list-item [routerLink]="'/''"> Generate Report </a>-->

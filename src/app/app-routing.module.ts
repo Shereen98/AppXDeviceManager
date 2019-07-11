@@ -9,6 +9,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { DeviceListComponent } from './device-list/device-list.component';
 
 
 const routes: Routes = [
@@ -20,7 +21,8 @@ const routes: Routes = [
   {path:'return-device',component:ReturnDeviceComponent},
   {path:'toolbar',component:ToolbarComponent},
   {path:'side-menu',component:SideMenuComponent},
-  {path:'admin-home',component:AdminHomeComponent}
+  {path:'admin-home',component:AdminHomeComponent},
+  {path:'device-list',component:DeviceListComponent}
 ];
 
 @NgModule({
@@ -29,4 +31,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 export const routingComponents=[LoginComponent,AddUserComponent,UserHomeComponent,AddDeviceComponent,
-  AssignDeviceComponent,ReturnDeviceComponent,ToolbarComponent,SideMenuComponent,AdminHomeComponent]
+  AssignDeviceComponent,ReturnDeviceComponent,ToolbarComponent,SideMenuComponent,AdminHomeComponent,DeviceListComponent]

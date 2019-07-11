@@ -1,0 +1,63 @@
+<div class="device-list-container">
+<div fxAlign="center">
+        <br> <h1>&nbsp; AppX Devices</h1>
+     </div>
+<div class="search-div">
+        <button mat-raised-button matTooltip="Add a new device" (click)="onCreate()">
+          <mat-icon>add</mat-icon>Add Device
+        </button>
+        <mat-form-field class="search-form-field" floatLabel="never" matTooltip="Filter records">
+          <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+          <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+<div class="mat-elevation-z8">
+    <mat-table [dataSource]="listData" matSort>
+        <ng-container matColumnDef="barcode">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Barcode</mat-header-cell>
+            <mat-cell *matCellDef="let element"><a [routerLink]="'/'">{{element.barcode}}</a></mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Device Name</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="aDate">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Added Date</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.aDate}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="condition">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Condition</mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{element.condition}}</mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="status">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+                            <mat-cell *matCellDef="let element">{{element.status}}</mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="actions">
+                                <mat-header-cell *matHeaderCellDef ></mat-header-cell>
+                                <mat-cell *matCellDef="let row">
+                                        <button mat-raised-button color="accent" style="background-color:silver;cursor: pointer;"matTooltip="Change the condition of the device">Edit Condition</button>
+                                        <button mat-raised-button style="margin-left:5px;background-color:silver"matTooltip="Add a review for the device">Add Review</button>
+                                    <button mat-icon-button matTooltip="Remove the device" (click)="onDelete(row.$key)"><mat-icon>delete</mat-icon></button>
+                                </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="loading">
+                                    <mat-footer-cell *matFooterCellDef colspan="6">
+                                      Loading data...
+                                    </mat-footer-cell>
+                                  </ng-container>
+                                  <ng-container matColumnDef="noData">
+                                        <mat-footer-cell *matFooterCellDef colspan="6">
+                                          No data
+                                        </mat-footer-cell>
+                                      </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+        <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+</div>
+</div>

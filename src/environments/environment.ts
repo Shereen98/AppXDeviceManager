@@ -5,12 +5,12 @@
 export const environment = {
   production: false,
   urlAddress:"http://localhost:4200/",
-  firebase : {
+  firebaseConfig : {
     apiKey: "AIzaSyAQ0mFH2OZ7AvlVIfmr4g49H6QSxSKNDks",
     authDomain: "appx-device-manager.firebaseapp.com",
     databaseURL: "https://appx-device-manager.firebaseio.com",
     projectId: "appx-device-manager",
-    storageBucket: "",
+    storageBucket: "appx-device-manager.appspot.com",
     messagingSenderId: "67924899594",
     appId: "1:67924899594:web:fdd3b65fd9d5ba88"
   }
