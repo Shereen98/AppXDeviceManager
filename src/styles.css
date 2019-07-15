@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin:0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 /*notification*/
 snack-bar-container.success {
@@ -35,7 +35,7 @@ snack-bar-container.notification simple-snack-bar{
 }
 .confirm-dialog-container #close-icon{
     margin-left: auto;
-    order: 2;
+    order: 3;
     font-weight: bolder;
 }
 .confirm-dialog-container #close-icon:hover{
@@ -64,4 +64,9 @@ font-weight:bold
     padding:  35px 16px;
     text-align: center;
     font-size: 20px;
+}
+
+.fill-remaining-space{
+    /*This fills the remaining space, by using flex box*/
+    flex:1 1 auto;
 }

@@ -1,6 +1,0 @@
-export interface DeviceCreation{
-    barcode: string;
-    name:string;
-    condition:string;
-    status:string;
-}

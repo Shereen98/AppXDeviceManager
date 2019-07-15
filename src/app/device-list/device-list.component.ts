@@ -4,6 +4,7 @@ import { MatTableDataSource,MatSort,MatPaginator,MatDialog,MatDialogConfig } fro
 import { AddDeviceComponent } from '../add-device/add-device.component';
 import { NotificationService } from '../shared/notification.service';
 import { DialogService } from '../shared/dialog.service';
+import { EditConditionComponent } from '../edit-condition/edit-condition.component';
 
 @Component({
   selector: 'app-device-list',
@@ -73,4 +74,12 @@ export class DeviceListComponent implements OnInit {
     });
   }
 
+  editCondition($key){
+    //this.service.populateForm($key);
+    const dialogConditionConfig = new MatDialogConfig();
+    dialogConditionConfig.disableClose=false;
+    dialogConditionConfig.autoFocus=true;
+    dialogConditionConfig.width= "30%" ;
+    this.dialog.open(EditConditionComponent,dialogConditionConfig);
+  }
 }

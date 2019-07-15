@@ -1,7 +1,7 @@
 <mat-toolbar>
         <span>{{service.form.controls['$key'].value?"Modify Device":"Add a new device"}}</span>
         <span class="fill-remaining-space"></span>
-        <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1" style="margin-left:79%;"><mat-icon>clear</mat-icon></button>
+        <button class="btn-dialog-close" mat-button (click)="onClose()" tabIndex="-1"><mat-icon>cancel</mat-icon></button>
       </mat-toolbar>
 <form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()">
     <mat-grid-list cols="2" rowHeight="300px">
@@ -35,7 +35,6 @@
         </mat-grid-tile>
         <mat-grid-tile>
             <div class="controles-container">
-                    
                         <div class="add-bottom-padding">
                             <label>Device Status* :</label>
                             <mat-radio-group formControlName="status">
@@ -43,13 +42,6 @@
                                 <mat-radio-button value='Assigned' color="primary">Assigned</mat-radio-button>
                             </mat-radio-group>
                         </div>
-                        <!--<mat-form-field>
-                                <mat-select formControlName="status" placeholder="Device Status">
-                                    <ng-container *ngFor="let status of deviceStatus">
-                                        <mat-option value="{{status.id}}">{{status.value}}</mat-option>
-                                    </ng-container>
-                                </mat-select>
-                            </mat-form-field>-->
                         <div style="margin-top:25px;">
                             <label>Upload an Image :&nbsp;&nbsp;&nbsp;</label>
                             <button mat-raised-button color="basic" type="submit">Choose Image</button>

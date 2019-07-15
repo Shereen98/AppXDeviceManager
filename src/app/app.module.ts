@@ -12,17 +12,22 @@ import { HttpClientModule } from '@angular/common/http';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { environment } from 'src/environments/environment';
 import {DeviceService} from './shared/device.service';
+import{UserService} from './shared/user.service';
 import { DatePipe } from '@angular/common';
 import { NotificationService } from './shared/notification.service';
 import { AddDeviceComponent } from './add-device/add-device.component';
 import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
+import { EditConditionComponent } from './edit-condition/edit-condition.component';
+import { AddUserComponent } from './add-user/add-user.component';
+
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents,
-    MatConfirmDialogComponent,   
+    MatConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,9 +47,11 @@ import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dial
   providers: [
     DeviceService,
     NotificationService,
-    DatePipe
+    UserService,
+    DatePipe,
+
   ],
   bootstrap: [AppComponent],
-  entryComponents:[AddDeviceComponent,MatConfirmDialogComponent]
+  entryComponents:[AddDeviceComponent,MatConfirmDialogComponent,EditConditionComponent,AddUserComponent]
 })
 export class AppModule { }

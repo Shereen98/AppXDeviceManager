@@ -33,7 +33,6 @@ export class DeviceService {
       status:'Unassigned'
     })
   }
-
   getDevices(){
     this.deviceList = this.firebase.list('devices');
     return this.deviceList.snapshotChanges();
@@ -51,11 +50,7 @@ export class DeviceService {
 
   updateDevice(device){
     this.deviceList.update(device.$key,{
-      barcode:device.barcode,
-      name:device.name,
-      addDate:device.addDate== "" ? "" : this.datePipe.transform(device.hireDate, 'yyyy-MM-dd'),
-      condition:device.condition,
-      status:device.status
+      condition:device.condition
     });
   }
 
