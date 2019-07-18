@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule ,routingComponents} from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AngularFireModule} from 'angularfire2';
+import { AngularFireStorageModule} from 'angularfire2/storage';
 import { AngularFireDatabaseModule} from 'angularfire2/database';
 import { ReactiveFormsModule ,FormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,8 +18,7 @@ import { DatePipe } from '@angular/common';
 import { NotificationService } from './shared/notification.service';
 import { AddDeviceComponent } from './add-device/add-device.component';
 import { MatConfirmDialogComponent } from './mat-confirm-dialog/mat-confirm-dialog.component';
-import { EditConditionComponent } from './edit-condition/edit-condition.component';
-import { AddUserComponent } from './add-user/add-user.component';
+import { EditConditionComponent } from './edit-condition/edit-condition.component'; 
 
 
 
@@ -39,6 +39,7 @@ import { AddUserComponent } from './add-user/add-user.component';
     MaterialModule,
     FlexLayoutModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule,
     AngularFireDatabaseModule,
     ReactiveFormsModule,
     FormsModule
@@ -48,10 +49,9 @@ import { AddUserComponent } from './add-user/add-user.component';
     DeviceService,
     NotificationService,
     UserService,
-    DatePipe,
-
+    DatePipe
   ],
   bootstrap: [AppComponent],
-  entryComponents:[AddDeviceComponent,MatConfirmDialogComponent,EditConditionComponent,AddUserComponent]
+  entryComponents:[AddDeviceComponent,MatConfirmDialogComponent,EditConditionComponent]
 })
 export class AppModule { }

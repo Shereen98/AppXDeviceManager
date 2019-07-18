@@ -6,7 +6,6 @@ import { AddDeviceComponent } from './add-device/add-device.component';
 import { AssignDeviceComponent } from './assign-device/assign-device.component';
 import { ReturnDeviceComponent } from './return-device/return-device.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import { AddUserComponent } from './add-user/add-user.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { DeviceListComponent } from './device-list/device-list.component';
 import { EditConditionComponent } from './edit-condition/edit-condition.component';
@@ -15,7 +14,6 @@ import { UserListComponent } from './user-list/user-list.component';
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},
-  {path:'add-user',component:AddUserComponent},
   {path:'user-home',component:UserHomeComponent},
   {path:'add-device',component:AddDeviceComponent},
   {path:'assign-device',component:AssignDeviceComponent},
@@ -32,5 +30,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents=[LoginComponent,AddUserComponent,UserHomeComponent,AddDeviceComponent,
+export const routingComponents=[LoginComponent,UserHomeComponent,AddDeviceComponent,
   AssignDeviceComponent,ReturnDeviceComponent,ToolbarComponent,AdminHomeComponent,DeviceListComponent,EditConditionComponent,UserListComponent]

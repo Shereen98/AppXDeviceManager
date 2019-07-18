@@ -1,1 +1,37 @@
-<p>assign-device works!</p>
+<!--<mat-toolbar>
+        <span>{{service.assignForm.controls['$key'].value?"Modify Device":"Add a new device"}}</span>
+        <span class="fill-remaining-space"></span>
+        <button class="btn-dialog-close" mat-button (click)="onClose()" tabIndex="-1"><mat-icon>cancel</mat-icon></button>
+      </mat-toolbar>-->
+<form [formGroup]="service.assignForm" class="normal-form" (submit)="onSubmit()">
+            <div class="controles-container">
+                <h1>Assign Device</h1>
+                    <!--<input type="hidden" formControlName="$key">-->
+                    <mat-form-field>
+                       <input formControlName="device" matInput placeholder="Device Barcode*">
+                       <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field><br>
+                    <mat-form-field>
+                            <input formControlName="user" matInput placeholder="User Name*">
+                            <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field><br>
+                    <mat-form-field>
+                        <input formControlName="date" matInput [matDatepicker]="picker" placeholder="Date*">
+                        <mat-error>This field is mandatory.</mat-error>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field><br>
+                    <mat-form-field>
+                            <mat-select formControlName="condition" placeholder="Device Condition*">
+                                <ng-container *ngFor="let condition of deviceCondition">
+                                    <mat-option value="{{condition.value}}">{{condition.value}}</mat-option>
+                                </ng-container>
+                            </mat-select>
+                            <mat-error>This field is mandatory.</mat-error>
+                        </mat-form-field>
+                        <div class="button-row">
+                            <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid" style="margin-left:14%;width:10%">Submit</button>
+                            <button mat-raised-button color="warn" type="submit" (click)="onClear()" style="margin-left:1%;width:10%">Clear</button>
+                        </div>    
+            </div>
+</form>
