@@ -1,13 +1,9 @@
 import { Injectable } from '@angular/core';
-//import { HttpClient, HttpHeaders } from '@angular/common/http';
-//import { environment } from 'src/environments/environment';
 import { FormGroup,FormControl,Validators} from "@angular/forms";
-import {AngularFireDatabase,AngularFireList} from 'angularfire2/database';
+import {AngularFireDatabase,AngularFireList} from '@angular/fire/database';
 import { DatePipe } from '@angular/common';
 import {UserService} from './user.service';
-import { AngularFireStorage } from 'angularfire2/storage';
-import { UploadTask } from '@angular/fire/storage/interfaces';
-import { firestore } from 'firebase';
+import { AngularFireStorage } from '@angular/fire/storage';
 import * as firebase from 'firebase';
 
 @Injectable({
@@ -16,10 +12,22 @@ import * as firebase from 'firebase';
 export class DeviceService {
 
   constructor(private firebase:AngularFireDatabase,private datePipe: DatePipe,
-    private userService:UserService,private storage:AngularFireStorage) { }
+    private userService:UserService,private storage:AngularFireStorage) { 
+      this.deviceList = this.firebase.list('devices');
+      this.deviceList.snapshotChanges().subscribe(
+        list => {
+          this.array = list.map(item => {
+            return {
+              $key: item.key,
+              ...item.payload.val() 
+            }
+          })
+        });
+    }
 
   deviceList: AngularFireList<any>;
-  assignList:AngularFireList<any>;
+  array = [];
+  
   private basePath:string='/images';
   private uploadTask:firebase.storage.UploadTask;
 
@@ -33,40 +41,21 @@ export class DeviceService {
     image:new FormControl('')
   });
 
-  assignForm: FormGroup = new FormGroup({
-    device:new FormControl(null),
-    user:new FormControl(null),
-    date:new FormControl(''),
-    condition:new FormControl(0)
-  })
-
   initializeFormGroup(){
     this.form.setValue({
-      $key:null,
+      $key: null,
       barcode:'',
       name:'',
       addDate: '',
       condition:0,
       status:'Unassigned',
       image:''
-    }),
-
-    this.assignForm.setValue({
-      device:null,
-      user: null,
-      date:'',
-      condition:0
     })
   }
 
   getDevices(){
     this.deviceList = this.firebase.list('devices');
     return this.deviceList.snapshotChanges();
-  }
-
-  getAssignDevices(){
-    this.assignList = this.firebase.list('assign-devices');
-    return this.assignList.snapshotChanges();
   }
 
   addDevice(device){
@@ -77,25 +66,26 @@ export class DeviceService {
       condition:device.condition,
       status:device.status,
       image:device.image
-      //imagePath:'${device.name}/${device.image}_${new Date().getTime()}'
     });
   }
 
-  addAssignDevice(assignDevice){
-    this.assignList.push({
-      device:assignDevice.device,
-      user:assignDevice.user,
-      date:assignDevice.date== "" ? "" : this.datePipe.transform(assignDevice.date,'yyyy-MM-dd')
-    })
-  }
-
-  updateDevice(device){
+  updateCondition(device){
     this.deviceList.update(device.$key,{
       condition:device.condition
     });
   }
 
+  updateStatus(device){
+    this.deviceList.update(device.$key,{
+      status: 'Assigned'
+    })
+  }
+
   deleteDevice($key: string){
       this.deviceList.remove($key);
+  }
+
+  populateForm(device){
+    this.form.setValue(device);
   }
 }

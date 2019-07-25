@@ -5,6 +5,8 @@ import { AddDeviceComponent } from '../add-device/add-device.component';
 import { NotificationService } from '../shared/notification.service';
 import { DialogService } from '../shared/dialog.service';
 import { EditConditionComponent } from '../edit-condition/edit-condition.component';
+import { AssignDeviceComponent } from '../assign-device/assign-device.component';
+import { AssignDeviceService} from '../shared/assign-device.service';
 
 @Component({
   selector: 'app-device-list',
@@ -14,6 +16,7 @@ import { EditConditionComponent } from '../edit-condition/edit-condition.compone
 export class DeviceListComponent implements OnInit {
 
   constructor(private service:DeviceService,
+    private assignService:AssignDeviceService,
     private dialog:MatDialog,
     private notificationService:NotificationService,
     private dialogService: DialogService) { }
@@ -60,10 +63,18 @@ export class DeviceListComponent implements OnInit {
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "78%";
+    dialogConfig.height = "70%;"
     this.dialog.open(AddDeviceComponent,dialogConfig);
-
   }
 
+  editCondition(row){
+    this.service.populateForm(row);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "38%";
+    this.dialog.open(EditConditionComponent,dialogConfig);
+  }
   onDelete($key){
    this.dialogService.openConfirmDialog('Are you sure to delete this record ?')
     .afterClosed().subscribe(res =>{
@@ -74,12 +85,23 @@ export class DeviceListComponent implements OnInit {
     });
   }
 
-  editCondition($key){
+  assignDevice(row){
+    //this.service.initializeFormGroup();
+    this.service.populateForm(row);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "50%";
+    dialogConfig.height="60%";
+    this.dialog.open(AssignDeviceComponent,dialogConfig);
+
+  }
+  /*editCondition(row){
     //this.service.populateForm($key);
     const dialogConditionConfig = new MatDialogConfig();
     dialogConditionConfig.disableClose=false;
     dialogConditionConfig.autoFocus=true;
     dialogConditionConfig.width= "30%" ;
     this.dialog.open(EditConditionComponent,dialogConditionConfig);
-  }
+  }*/
 }

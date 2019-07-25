@@ -1,13 +1,17 @@
 mat-form-field{
-    width: 400px;
+    width: 300px;
 }
 mat-card-title{
     text-align: center;
 }
 
 form.normal-form{
-   margin-left:34%;
-   margin-right:10%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+   /*margin-left:34%;
+   margin-right:10%;*/
 }
 
 .controle-container{

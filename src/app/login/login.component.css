@@ -1,0 +1,24 @@
+mat-form-field{
+    width: 400px;
+}
+mat-card-title{
+    text-align: center;
+}
+
+form.normal-form{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+   /*margin-left:34%;
+   margin-right:10%;*/
+}
+
+.controle-container{
+    width: 100px;
+    padding:10%;
+}
+
+.controle-container>  * { 
+    width: 100%;
+}

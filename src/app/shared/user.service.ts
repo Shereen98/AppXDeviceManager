@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup,FormControl,Validators} from "@angular/forms";
-import {AngularFireDatabase,AngularFireList} from 'angularfire2/database';
+import {AngularFireDatabase,AngularFireList} from '@angular/fire/database';
 import { DatePipe } from '@angular/common'
 
 @Injectable({
@@ -8,9 +8,21 @@ import { DatePipe } from '@angular/common'
 })
 export class UserService {
 
-  constructor(private firebase:AngularFireDatabase,private datePipe: DatePipe) { }
+  constructor(private firebase:AngularFireDatabase,private datePipe: DatePipe) { 
+    this.userList = this.firebase.list('users');
+      this.userList.snapshotChanges().subscribe(
+        list => {
+          this.array = list.map(item => {
+            return {
+              $key: item.key,
+              ...item.payload.val() 
+            }
+          })
+        });
+  }
 
   userList: AngularFireList<any>;
+  array =[];
 
   form: FormGroup = new FormGroup({
     $key:new FormControl(null),

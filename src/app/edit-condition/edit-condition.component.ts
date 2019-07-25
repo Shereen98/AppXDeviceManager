@@ -20,17 +20,20 @@ export class EditConditionComponent implements OnInit {
     { id: 3, value: 'Not Good' },
   ]
   ngOnInit() {
+    this.service.getDevices();
   }
 
-  /*onSubmit() {
+  onSubmit() {
     if (this.service.form.valid) {
-      this.service.updateDevice(this.service.form.value);
+      if (this.service.form.get('$key').value){
+      this.service.updateCondition(this.service.form.value);
+      }
       this.service.form.reset();
       this.service.initializeFormGroup();
       this.notificationService.success('Condition changed !');
       this.onClose();
     }
-  }*/
+  }
   onClose(){
     this.service.form.reset();
     this.service.initializeFormGroup();

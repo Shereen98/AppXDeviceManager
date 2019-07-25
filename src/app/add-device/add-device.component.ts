@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {DeviceService} from '../shared/device.service';
 import {NotificationService } from '../shared/notification.service';
 import {MatDialogRef} from '@angular/material';
-import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from 'angularfire2/storage';
+import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
 import { finalize } from "rxjs/operators";
 import { HttpClient } from '@angular/common/http';
 
@@ -17,6 +17,7 @@ export class AddDeviceComponent implements OnInit {
   selectedImage:File=null;
   ref:AngularFireStorageReference;
   task:AngularFireUploadTask;
+  barcode:string;
 
   constructor(private service:DeviceService,
     private notificationService:NotificationService,
@@ -44,20 +45,40 @@ export class AddDeviceComponent implements OnInit {
     this.service.initializeFormGroup();
   }
 
-  onSubmit(){
+  /*onSubmit(){
     if(this.service.form.valid){
-      this.onUpload()
-
-            this.service.addDevice(this.service.form.value);
-            this.service.form.reset();
-            this.service.initializeFormGroup();
-            this.notificationService.success('Device added successfully !');
-            this.onClose();
+      if (!this.service.form.get('$key').value){
+        this.service.addDevice(this.service.form.value);
+        this.notificationService.success('Device added successfully !');
+      }
+      else{
+        this.service.updateCondition(this.service.form.value);
+        this.notificationService.success('Condition changed successfully !');
+      }
+      this.service.form.reset();
+      this.service.initializeFormGroup();
+      this.onClose();
       //this.service.addDevice(this.service.form.value);
       //this.service.form.reset();
       //this.service.initializeFormGroup();
       
     }
+  }*/
+
+  onSubmit(){
+    try {
+      if(this.service.form.valid){
+        this.onUpload(event);
+        this.service.addDevice(this.service.form.value);
+        this.notificationService.success("Device Added successfully !");
+        this.service.form.reset();
+        this.service.initializeFormGroup();
+        this.onClose();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
   }
 
   onClose(){
@@ -70,14 +91,15 @@ export class AddDeviceComponent implements OnInit {
     this.selectedImage=<File>event.target.files[0];
   
   }
-  /*onUpload(event){
+  onUpload(event){
     const id=Math.random().toString(36).substring(2);
     this.ref = this.storage.ref(id);
-    this.task = this.ref.put(event.target.files[0]);
-  }*/
+    this.task = this.ref.put(this.selectedImage);
+  }
   
-  onUpload(){
-    const fd = new FormData();
+  /*onUpload(){
+    try {
+      const fd = new FormData();
     fd.append('image',this.selectedImage,this.selectedImage.name);
     this.http.post('https://us-central1-appx-device-manager.cloudfunctions.net/uploadFile',fd)
     .subscribe((res : any) => {
@@ -85,7 +107,11 @@ export class AddDeviceComponent implements OnInit {
         error => console.log('oops', error)
       
     })
+    } catch (error) {
+      console.log(error);
+    }
     
-  }
+    
+  }*/
 
 }

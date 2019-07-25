@@ -18,7 +18,7 @@
                                 <mat-error>This field is mandatory.</mat-error>
                             </mat-form-field>
                           <mat-form-field>
-                                <input formControlName="password" matInput placeholder="Password">
+                                <input type = "password" formControlName="password" matInput placeholder="Password">
                         </mat-form-field> 
                         <button mat-raised-button type="submit" color="primary" [disabled]="userService.form.invalid" style="margin-left:3%;width:6%">Add</button>
                         <button mat-raised-button color="warn" type="submit" (click)="onClear()" style="margin-left:1%;width:6%">Clear</button> 

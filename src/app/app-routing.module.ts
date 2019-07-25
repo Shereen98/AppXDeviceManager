@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { UserHomeComponent } from './user-home/user-home.component';
+
 import { AddDeviceComponent } from './add-device/add-device.component';
 import { AssignDeviceComponent } from './assign-device/assign-device.component';
 import { ReturnDeviceComponent } from './return-device/return-device.component';
@@ -13,8 +13,8 @@ import { UserListComponent } from './user-list/user-list.component';
 
 
 const routes: Routes = [
+  
   {path:'login',component:LoginComponent},
-  {path:'user-home',component:UserHomeComponent},
   {path:'add-device',component:AddDeviceComponent},
   {path:'assign-device',component:AssignDeviceComponent},
   {path:'return-device',component:ReturnDeviceComponent},
@@ -22,7 +22,8 @@ const routes: Routes = [
   {path:'admin-home',component:AdminHomeComponent},
   {path:'device-list',component:DeviceListComponent},
   {path:'edit-condition',component:EditConditionComponent},
-  {path:'user-list',component:UserListComponent}
+  {path:'user-list',component:UserListComponent},
+  { path: '' , redirectTo: '/login' , pathMatch: 'full'}
 ];
 
 @NgModule({
@@ -30,5 +31,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents=[LoginComponent,UserHomeComponent,AddDeviceComponent,
+export const routingComponents=[LoginComponent,AddDeviceComponent,
   AssignDeviceComponent,ReturnDeviceComponent,ToolbarComponent,AdminHomeComponent,DeviceListComponent,EditConditionComponent,UserListComponent]
