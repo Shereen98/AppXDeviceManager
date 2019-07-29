@@ -1,0 +1,41 @@
+<mat-toolbar>
+  <span>Add Review</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-button (click)="onClose()" tabIndex="-1">
+    <mat-icon>cancel</mat-icon>
+  </button> </mat-toolbar
+><br />
+<form [formGroup]="form" class="normal-form" (submit)="onSubmit()">
+  <div class="controles-container">
+    <input type="hidden" formControlName="$key" />
+    <mat-form-field>
+      <input
+        type="text"
+        formControlName="review"
+        matInput
+        placeholder="Add Review*"
+      />
+      <mat-error>This field is mandatory.</mat-error>
+    </mat-form-field>
+    <div class="button-row">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="form.invalid"
+        style="margin-left:24%;width:25%"
+      >
+        Submit
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        type="submit"
+        (click)="onClear()"
+        style="margin-left:2%;width:25%"
+      >
+        Clear
+      </button>
+    </div>
+  </div>
+</form>

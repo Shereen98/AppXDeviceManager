@@ -16,14 +16,13 @@ import { AssignDeviceService } from "../shared/assign-device.service";
 import { ReturnDeviceComponent } from "../return-device/return-device.component";
 import { ActivatedRoute } from "@angular/router";
 import { AngularFireDatabase, AngularFireList } from "@angular/fire/database";
-import { AddReviewComponent } from "../add-review/add-review.component";
 
 @Component({
-  selector: "app-device-list",
-  templateUrl: "./device-list.component.html",
-  styleUrls: ["./device-list.component.css"]
+  selector: "app-user-home",
+  templateUrl: "./user-home.component.html",
+  styleUrls: ["./user-home.component.css"]
 })
-export class DeviceListComponent implements OnInit {
+export class UserHomeComponent implements OnInit {
   constructor(
     private service: DeviceService,
     private assignService: AssignDeviceService,
@@ -120,21 +119,6 @@ export class DeviceListComponent implements OnInit {
       dialogConfig.height = "50%";
       dialogConfig.data = row;
       this.dialog.open(ReturnDeviceComponent, dialogConfig);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  addReview(row) {
-    try {
-      //this.service.populateForm(row);
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.disableClose = false;
-      dialogConfig.autoFocus = true;
-      dialogConfig.width = "50%";
-      dialogConfig.height = "50%";
-      dialogConfig.data = row;
-      this.dialog.open(AddReviewComponent, dialogConfig);
     } catch (error) {
       console.log(error);
     }

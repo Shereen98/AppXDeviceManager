@@ -1,18 +1,41 @@
 <mat-toolbar>
-        <span>{{service.form.controls['$key'].value?"Change Device Condition":"Edit Condition"}}</span>
-        <span class="fill-remaining-space" style="width:50%;"></span>
-        <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"  style="width:5px"><mat-icon>clear</mat-icon></button>
-      </mat-toolbar>
+  <span>{{
+    service.form.controls["$key"].value
+      ? "Change Device Condition"
+      : "Edit Condition"
+  }}</span>
+  <span class="fill-remaining-space" style="width:50%;"></span>
+  <button
+    class="btn-dialog-close"
+    mat-stroked-button
+    (click)="onClose()"
+    tabIndex="-1"
+    style="width:5px"
+  >
+    <mat-icon>cancel</mat-icon>
+  </button>
+</mat-toolbar>
 <form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()">
-            <div class="controles-container">
-                    <mat-form-field>
-                            <mat-select formControlName="condition" placeholder="New Device Condition">
-                                <ng-container *ngFor="let condition of deviceCondition">
-                                    <mat-option value="{{condition.value}}">{{condition.value}}</mat-option>
-                                </ng-container>
-                            </mat-select>
-                            <mat-error>This field is mandatory.</mat-error>
-                        </mat-form-field> 
-                        <button mat-raised-button type="submit" style="background-color:darkblue;color:white;width:45%;margin-left:25%">Submit</button>
-            </div> 
+  <div class="controles-container">
+    <mat-form-field>
+      <mat-select
+        formControlName="condition"
+        placeholder="New Device Condition"
+      >
+        <ng-container *ngFor="let condition of deviceCondition">
+          <mat-option value="{{ condition.value }}">{{
+            condition.value
+          }}</mat-option>
+        </ng-container>
+      </mat-select>
+      <mat-error>This field is mandatory.</mat-error>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      type="submit"
+      style="background-color:darkblue;color:white;width:45%;margin-left:25%"
+    >
+      Submit
+    </button>
+  </div>
 </form>

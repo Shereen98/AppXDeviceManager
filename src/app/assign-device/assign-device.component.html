@@ -1,44 +1,61 @@
 <mat-toolbar>
-        <!--<span>{{service.assignForm.controls['$key'].value?"Modify Device":"Add a new device"}}</span>-->
-        <span>Assign Device</span>
-        <!--<span>Assign Device</span>-->
-        <span class="fill-remaining-space"></span>
-        <button class="btn-dialog-close" mat-button (click)="onClose()" tabIndex="-1"><mat-icon>cancel</mat-icon></button>
-      </mat-toolbar><br>
-<form [formGroup]="assignService.form" class="normal-form" (submit)="onSubmit()">
-            <div class="controles-container">
-                    <input type="hidden" formControlName="$key">
-                    <form [formGroup] = "service.form" class="normal-form">
-                        <input type="hidden" formControlName="barcode">
-                    </form>
-                   <!--<label>Device barcode : </label>
-                    <span *ngFor="let device of service.array[0]">{{device.barcode}}</span>--> 
-                    <!--<br>
-                    --><mat-form-field>
-                                <mat-select formControlName="barcode" placeholder="Barcode*">
-                                                <ng-container *ngFor="let device of service.array">
-                                                    <mat-option value="{{device.barcode}}">{{device.barcode}}</mat-option>
-                                                </ng-container>
-                                            </mat-select>
-                                            <mat-error>This field is mandatory.</mat-error>
-                                        </mat-form-field> <br>
-                    <mat-form-field>
-                                <mat-select formControlName="username" placeholder="Username*">
-                                    <ng-container *ngFor="let user of userService.array">
-                                        <mat-option value="{{user.username}}">{{user.username}}</mat-option>
-                                    </ng-container>
-                                </mat-select>
-                                <mat-error>This field is mandatory.</mat-error>
-                            </mat-form-field>   <br>
-                            <mat-form-field>
-                                        <input formControlName="assignDate" matInput [matDatepicker]="picker" placeholder="Date*">
-                                        <mat-error>This field is mandatory.</mat-error>
-                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                        <mat-datepicker #picker></mat-datepicker>
-                                    </mat-form-field>
-                    <div class="button-row">
-                            <button mat-raised-button color="primary" type="submit" [disabled]="assignService.form.invalid" style="margin-left:24%;width:25%">Submit</button>
-                            <button mat-raised-button color="warn" type="submit" (click)="onClear()" style="margin-left:2%;width:25%">Clear</button>
-                    </div>    
-            </div>
+  <span>Assign Device - {{ assignDevice.barcode }}</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-button (click)="onClose()" tabIndex="-1">
+    <mat-icon>cancel</mat-icon>
+  </button> </mat-toolbar
+><br />
+<form
+  [formGroup]="assignService.form"
+  class="normal-form"
+  (submit)="onSubmit()"
+>
+  <div class="controles-container">
+    <form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()">
+      <input type="hidden" formControlName="barcode" />
+    </form>
+    <input type="hidden" formControlName="$key" />
+    <mat-form-field>
+      <mat-select formControlName="username" placeholder="Username*">
+        <ng-container *ngFor="let user of userService.array">
+          <mat-option value="{{ user.username }}">{{
+            user.username
+          }}</mat-option>
+        </ng-container>
+      </mat-select>
+      <mat-error>This field is mandatory.</mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <input
+        formControlName="assignDate"
+        matInput
+        [matDatepicker]="picker"
+        placeholder="Date*"
+      />
+      <mat-error>This field is mandatory.</mat-error>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <div class="button-row">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="assignService.form.invalid"
+        style="margin-left:24%;width:25%"
+      >
+        Submit
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        type="submit"
+        (click)="onClear()"
+        style="margin-left:2%;width:25%"
+      >
+        Clear
+      </button>
+    </div>
+  </div>
 </form>

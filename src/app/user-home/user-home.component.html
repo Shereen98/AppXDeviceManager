@@ -1,16 +1,9 @@
 <div class="device-list-container">
   <div fxAlign="center">
     <br /><br />
-    <h3>&nbsp; AppX Devices</h3>
+    <h3>&nbsp; Assigned Devices</h3>
   </div>
   <div class="search-div">
-    <button
-      mat-raised-button
-      matTooltip="Add a new device"
-      (click)="onCreate()"
-    >
-      <mat-icon>add</mat-icon>Add Device
-    </button>
     <mat-form-field
       class="search-form-field"
       floatLabel="never"
@@ -75,12 +68,13 @@
           <button
             mat-raised-button
             color="accent"
-            style="background-color:silver;cursor: pointer;margin-left:5px;"
-            matTooltip="Assign the device"
-            (click)="assignDevice(row)"
+            style="background-color:silver;cursor: pointer;"
+            matTooltip="return the device"
+            (click)="returnDevice(row)"
           >
-            Assign
+            Return
           </button>
+
           <button
             mat-raised-button
             color="accent"
@@ -94,7 +88,6 @@
             mat-raised-button
             style="margin-left:5px;background-color:silver"
             matTooltip="Add a review for the device"
-            (click)="addReview(row)"
           >
             Add Review
           </button>

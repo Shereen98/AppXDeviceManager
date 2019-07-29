@@ -1,0 +1,28 @@
+<div class="device-details-container">
+  <h3>{{ device.name }} - {{ device.barcode }}</h3>
+  <br />
+  <table border="0">
+    <tr>
+      <td>Condition</td>
+      <td>: &nbsp;{{ device.condition }}</td>
+      <br />
+    </tr>
+    <tr>
+      <td>Status</td>
+      <td>: &nbsp;{{ device.status }}</td>
+      <br />
+    </tr>
+    <tr>
+      <td>Added Date</td>
+      <td>: &nbsp;{{ device.addDate }}</td>
+      <br />
+    </tr>
+  </table>
+
+  <img src="{{ device.image }}" alt="Device Image" />
+  <hr />
+  <h5>Device History</h5>
+  <span>{{ device.assign - history }}</span>
+  <hr />
+  <h5>Reviews</h5>
+</div>

@@ -1,9 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 import * as Material from "@angular/material";
-
-
-
 
 @NgModule({
   declarations: [],
@@ -15,9 +12,9 @@ import * as Material from "@angular/material";
     Material.MatListModule,
     Material.MatButtonModule,
     Material.MatIconModule,
-    Material.MatTableModule ,
-    Material.MatDatepickerModule, 
-    Material.MatNativeDateModule ,
+    Material.MatTableModule,
+    Material.MatDatepickerModule,
+    Material.MatNativeDateModule,
     Material.MatFormFieldModule,
     Material.MatGridListModule,
     Material.MatInputModule,
@@ -31,7 +28,7 @@ import * as Material from "@angular/material";
     Material.MatSortModule,
     Material.MatDialogModule
   ],
-  exports:[
+  exports: [
     CommonModule,
     Material.MatToolbarModule,
     Material.MatSidenavModule,
@@ -39,9 +36,9 @@ import * as Material from "@angular/material";
     Material.MatListModule,
     Material.MatButtonModule,
     Material.MatIconModule,
-    Material.MatTableModule ,
-    Material.MatDatepickerModule, 
-    Material.MatNativeDateModule ,
+    Material.MatTableModule,
+    Material.MatDatepickerModule,
+    Material.MatNativeDateModule,
     Material.MatFormFieldModule,
     Material.MatGridListModule,
     Material.MatInputModule,
@@ -56,4 +53,4 @@ import * as Material from "@angular/material";
     Material.MatDialogModule
   ]
 })
-export class MaterialModule { }
+export class MaterialModule {}

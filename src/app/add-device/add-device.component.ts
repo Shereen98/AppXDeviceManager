@@ -1,46 +1,48 @@
-import { Component, OnInit } from '@angular/core';
-import {DeviceService} from '../shared/device.service';
-import {NotificationService } from '../shared/notification.service';
-import {MatDialogRef} from '@angular/material';
-import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
+import { Component, OnInit } from "@angular/core";
+import { DeviceService } from "../shared/device.service";
+import { NotificationService } from "../shared/notification.service";
+import { MatDialogRef } from "@angular/material";
+import {
+  AngularFireStorage,
+  AngularFireStorageReference,
+  AngularFireUploadTask
+} from "@angular/fire/storage";
 import { finalize } from "rxjs/operators";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient } from "@angular/common/http";
 
 @Component({
-  selector: 'app-add-device',
-  templateUrl: './add-device.component.html',
-  styleUrls: ['./add-device.component.css']
+  selector: "app-add-device",
+  templateUrl: "./add-device.component.html",
+  styleUrls: ["./add-device.component.css"]
 })
 export class AddDeviceComponent implements OnInit {
+  devices: any[];
+  selectedImage: File = null;
+  ref: AngularFireStorageReference;
+  task: AngularFireUploadTask;
+  barcode: string;
 
-  devices:any[];
-  selectedImage:File=null;
-  ref:AngularFireStorageReference;
-  task:AngularFireUploadTask;
-  barcode:string;
-
-  constructor(private service:DeviceService,
-    private notificationService:NotificationService,
-    public dialogRef:MatDialogRef<AddDeviceComponent>,
-    private storage:AngularFireStorage,public http:HttpClient) { 
-  }
+  constructor(
+    private service: DeviceService,
+    private notificationService: NotificationService,
+    public dialogRef: MatDialogRef<AddDeviceComponent>,
+    private storage: AngularFireStorage,
+    public http: HttpClient
+  ) {}
 
   deviceCondition = [
-    { id: 1, value: 'Good' },
-    { id: 2, value: 'Average' },
-    { id: 3, value: 'Not Good' },
-  ]
+    { id: 1, value: "Good" },
+    { id: 2, value: "Average" },
+    { id: 3, value: "Not Good" }
+  ];
 
-  deviceStatus = [
-    { id: 1, value: 'Unassigned'},
-    { id: 2, value: 'Assigned'}
-  ]
+  deviceStatus = [{ id: 1, value: "Unassigned" }, { id: 2, value: "Assigned" }];
 
   ngOnInit() {
     this.service.getDevices();
   }
 
-  onClear(){
+  onClear() {
     this.service.form.reset();
     this.service.initializeFormGroup();
   }
@@ -65,9 +67,9 @@ export class AddDeviceComponent implements OnInit {
     }
   }*/
 
-  onSubmit(){
+  onSubmit() {
     try {
-      if(this.service.form.valid){
+      if (this.service.form.valid) {
         this.onUpload(event);
         this.service.addDevice(this.service.form.value);
         this.notificationService.success("Device Added successfully !");
@@ -78,40 +80,22 @@ export class AddDeviceComponent implements OnInit {
     } catch (error) {
       console.log(error);
     }
-
   }
 
-  onClose(){
+  onClose() {
     this.service.form.reset();
     this.service.initializeFormGroup();
     this.dialogRef.close();
   }
 
-  onFileSelected(event){
-    this.selectedImage=<File>event.target.files[0];
-  
+  onFileSelected(event) {
+    this.selectedImage = <File>event.target.files[0];
   }
-  onUpload(event){
-    const id=Math.random().toString(36).substring(2);
+  onUpload(event) {
+    const id = Math.random()
+      .toString(36)
+      .substring(2);
     this.ref = this.storage.ref(id);
     this.task = this.ref.put(this.selectedImage);
   }
-  
-  /*onUpload(){
-    try {
-      const fd = new FormData();
-    fd.append('image',this.selectedImage,this.selectedImage.name);
-    this.http.post('https://us-central1-appx-device-manager.cloudfunctions.net/uploadFile',fd)
-    .subscribe((res : any) => {
-      data => console.log('success', data)
-        error => console.log('oops', error)
-      
-    })
-    } catch (error) {
-      console.log(error);
-    }
-    
-    
-  }*/
-
 }

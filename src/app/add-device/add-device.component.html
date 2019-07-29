@@ -1,56 +1,102 @@
 <mat-toolbar>
-        <span>{{service.form.controls['$key'].value?"Modify Device":"Add a new device"}}</span>
-        <span class="fill-remaining-space"></span>
-        <button class="btn-dialog-close" mat-button (click)="onClose()" tabIndex="-1"><mat-icon>cancel</mat-icon></button>
-      </mat-toolbar>
+  <span>{{
+    service.form.controls["$key"].value ? "Modify Device" : "Add a new device"
+  }}</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-button (click)="onClose()" tabIndex="-1">
+    <mat-icon>cancel</mat-icon>
+  </button>
+</mat-toolbar>
 <form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()">
-    <mat-grid-list cols="2" rowHeight="300px">
-        <mat-grid-tile>
-            <div class="controles-container">
-                    <input type="hidden" formControlName="$key">
-                    <mat-form-field>
-                       <input formControlName="barcode" matInput placeholder="Device Barcode*" [(ngModel)] = "barcode">
-                       <mat-error>This field is mandatory.</mat-error>
-                    </mat-form-field>
-                    <mat-form-field>
-                            <input formControlName="name" matInput placeholder="Device Name*">
-                            <mat-error>This field is mandatory.</mat-error>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input formControlName="addDate" matInput [matDatepicker]="picker" placeholder="Date*">
-                        <mat-error>This field is mandatory.</mat-error>
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field>
-                    <mat-form-field>
-                            <mat-select formControlName="condition" placeholder="Device Condition*">
-                                <ng-container *ngFor="let condition of deviceCondition">
-                                    <mat-option value="{{condition.value}}">{{condition.value}}</mat-option>
-                                </ng-container>
-                            </mat-select>
-                            <mat-error>This field is mandatory.</mat-error>
-                        </mat-form-field>       
-            </div>   
-        </mat-grid-tile>
-        <mat-grid-tile>
-            <div class="controles-container">
-                        <div class="add-bottom-padding">
-                            <label>Device Status* :</label>
-                            <mat-radio-group formControlName="status">
-                                <mat-radio-button value='Unassigned' color="primary">Unassigned</mat-radio-button>
-                                <mat-radio-button value='Assigned' color="primary">Assigned</mat-radio-button>
-                            </mat-radio-group>
-                        </div>
-                        <div style="margin-top:25px;">
-                            <label>Upload an Image :</label>
-                           <!-- <button mat-raised-button color="basic" type="submit">Choose Image</button>-->
-                           <input type="file" accept="image/*" formControlName="image" style="margin-left:8%"(change)="onFileSelected($event)">
-                        </div>
-                        <div class="button-row">
-                            <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid">Submit</button>
-                            <button mat-raised-button color="warn" type="submit" (click)="onClear()">Clear</button>
-                        </div>    
-            </div>
-        </mat-grid-tile>
-    </mat-grid-list>
+  <mat-grid-list cols="2" rowHeight="300px">
+    <mat-grid-tile>
+      <div class="controles-container">
+        <input type="hidden" formControlName="$key" />
+        <mat-form-field>
+          <input
+            formControlName="barcode"
+            matInput
+            placeholder="Device Barcode*"
+            [(ngModel)]="barcode"
+          />
+          <mat-error>This field is mandatory.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="name" matInput placeholder="Device Name*" />
+          <mat-error>This field is mandatory.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            formControlName="addDate"
+            matInput
+            [matDatepicker]="picker"
+            placeholder="Date*"
+          />
+          <mat-error>This field is mandatory.</mat-error>
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select
+            formControlName="condition"
+            placeholder="Device Condition*"
+          >
+            <ng-container *ngFor="let condition of deviceCondition">
+              <mat-option value="{{ condition.value }}">{{
+                condition.value
+              }}</mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error>This field is mandatory.</mat-error>
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="controles-container">
+        <div class="add-bottom-padding">
+          <label>Device Status* :</label>
+          <mat-radio-group formControlName="status">
+            <mat-radio-button value="Unassigned" color="primary"
+              >Unassigned</mat-radio-button
+            >
+            <mat-radio-button value="Assigned" color="primary"
+              >Assigned</mat-radio-button
+            >
+          </mat-radio-group>
+        </div>
+        <div style="margin-top:25px;">
+          <label>Upload an Image :</label>
+          <!-- <button mat-raised-button color="basic" type="submit">Choose Image</button>-->
+          <input
+            type="file"
+            accept="image/*"
+            formControlName="image"
+            style="margin-left:8%"
+            (change)="onFileSelected($event)"
+          />
+        </div>
+        <div class="button-row">
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="service.form.invalid"
+          >
+            Submit
+          </button>
+          <button
+            mat-raised-button
+            color="warn"
+            type="submit"
+            (click)="onClear()"
+          >
+            Clear
+          </button>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
 </form>

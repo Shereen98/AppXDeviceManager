@@ -1,39 +1,49 @@
-import { Component, OnInit } from '@angular/core';
-import {DeviceService} from '../shared/device.service';
-import {UserService} from '../shared/user.service';
-import {NotificationService } from '../shared/notification.service';
-import {AssignDeviceService} from '../shared/assign-device.service';
-import {MatDialogRef} from '@angular/material';
-import {AddDeviceComponent} from '../add-device/add-device.component'
-import { snapshotChanges } from '@angular/fire/database';
+import { Component, OnInit, Inject } from "@angular/core";
+import { DeviceService } from "../shared/device.service";
+import { UserService } from "../shared/user.service";
+import { NotificationService } from "../shared/notification.service";
+import { AssignDeviceService } from "../shared/assign-device.service";
+import { MatDialogRef } from "@angular/material";
+import {
+  AngularFireList,
+  AngularFireDatabase
+} from "@angular/fire/database";
+import { MAT_DIALOG_DATA } from "@angular/material";
+import { DatePipe } from "@angular/common";
 
 @Component({
-  selector: 'app-assign-device',
-  templateUrl: './assign-device.component.html',
-  styleUrls: ['./assign-device.component.css']
+  selector: "app-assign-device",
+  templateUrl: "./assign-device.component.html",
+  styleUrls: ["./assign-device.component.css"]
 })
 export class AssignDeviceComponent implements OnInit {
+  assignDevice: any;
+  deviceKey: [];
+  assignDeviceList: AngularFireList<any>;
 
-  assignDevices:any[];
-
-  constructor(private service:DeviceService,
-    private notificationService:NotificationService,
-    private userService:UserService,
-    private assignService:AssignDeviceService,
-    public dialogRef:MatDialogRef<AssignDeviceComponent>) { }
-
-    
-
-  ngOnInit() {
-    this.assignService.getAssignDevices();
+  constructor(
+    private firebase: AngularFireDatabase,
+    private service: DeviceService,
+    private notificationService: NotificationService,
+    private userService: UserService,
+    private assignService: AssignDeviceService,
+    public dialogRef: MatDialogRef<AssignDeviceComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private datePipe: DatePipe
+  ) {
+    this.assignDevice = data;
   }
 
-  onSubmit(){
+  ngOnInit() {
+    this.getAssignDevices();
+    this.service.getDevices();
+  }
+  onSubmit() {
     try {
-      if(this.assignService.form.valid){
+      if (this.assignService.form.valid) {
         this.service.updateStatus(this.service.form.value);
-        //this.service.populateForm(this.service.form.value);
-        this.assignService.addAssignDevice(this.assignService.form.value);
+        this.service.populateForm(this.service.form.value);
+        this.addAssignDevice(this.assignService.form.value);
         this.notificationService.success("Device assigned successfully !");
         this.assignService.form.reset();
         this.assignService.initializeFormGroup();
@@ -42,23 +52,28 @@ export class AssignDeviceComponent implements OnInit {
     } catch (error) {
       console.log(error);
     }
-    
   }
 
-  onClose(){
+  onClose() {
     this.assignService.form.reset();
     this.assignService.initializeFormGroup();
     this.dialogRef.close();
   }
-}
-/*onSubmitt() {
-  if (this.service.form.valid) {
-    if (this.service.form.get('$key').value){
-    this.service.updateCondition(this.service.form.value);
-    }
-    this.service.form.reset();
-    this.service.initializeFormGroup();
-    this.notificationService.success('Condition changed !');
-    this.onClose();
+
+  getAssignDevices() {
+    this.assignDeviceList = this.firebase.list(
+      "devices/" + this.assignDevice.$key + "/assign-history"
+    );
+    return this.assignDeviceList.snapshotChanges();
   }
-}*/
+
+  addAssignDevice(assignDevice) {
+    this.assignDeviceList.push({
+      username: assignDevice.username,
+      assignDate:
+        assignDevice.assignDate == ""
+          ? ""
+          : this.datePipe.transform(assignDevice.assignDate, "yyyy-MM-dd")
+    });
+  }
+}

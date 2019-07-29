@@ -1,26 +1,35 @@
-<!--div class="login-container"> 
-    <h1>AppX Device Manager</h1>
-    <h2>Login</h2>
-    <form>
-        <input type="text" name="username" placeholder="Username"><br>
-        <input type="password" name="password" placeholder="Password"><br>
-        <button>Login</button>
-    </form>
-</div>-->
 <form [formGroup]="authService.form" class="normal-form" (submit)="onSubmit()">
-    <div class="controles-container" style="border-block-color: black">
-            <input type="hidden" formControlName="$key">
-            <br><br><br><br>
-            <mat-form-field>
-                    <input formControlName="username" matInput placeholder="Username*">
-                    <mat-error>This field is mandatory.</mat-error>
-            </mat-form-field><br><br>
-            <mat-form-field>
-                <input type="password" formControlName="password" matInput placeholder="Password*">
-                <mat-error>This field is mandatory.</mat-error>
-            </mat-form-field><br>
-            <div class="button-row">
-                    <button mat-raised-button  type="submit" [disabled]="authService.invalid" style="margin-left:39%;width:20%;background-color: darkblue;color:white">Login</button>
-            </div>    
+  <div class="controles-container" style="border-block-color: black">
+    <input type="hidden" formControlName="$key" />
+    <br /><br /><br /><br />
+    <mat-form-field>
+      <input
+        [(ngModel)]="email"
+        formControlName="email"
+        matInput
+        placeholder="Email*"
+      />
+      <mat-error>This field is mandatory.</mat-error> </mat-form-field
+    ><br /><br />
+    <mat-form-field>
+      <input
+        type="password"
+        [(ngModel)]="password"
+        formControlName="password"
+        matInput
+        placeholder="Password*"
+      />
+      <mat-error>This field is mandatory.</mat-error> </mat-form-field
+    ><br />
+    <div class="button-row">
+      <button
+        mat-raised-button
+        type="submit"
+        [disabled]="authService.invalid"
+        style="margin-left:39%;width:20%;background-color: darkblue;color:white"
+      >
+        Login
+      </button>
     </div>
+  </div>
 </form>

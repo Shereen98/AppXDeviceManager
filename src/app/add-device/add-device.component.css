@@ -12,41 +12,40 @@ th.mat-header-cell {
 
 /* Structure */
 
-mat-form-field{
-    width: 400px;
+mat-form-field {
+  width: 400px;
 }
-mat-card-title{
-    text-align: center;
-}
-
-form.normal-form{
-   margin-left:13%;
-   margin-right:10%;
+mat-card-title {
+  text-align: center;
 }
 
-.controle-container{
-    width: 60px;
-    padding:10%;
+form.normal-form {
+  margin-left: 13%;
+  margin-right: 10%;
 }
 
-.controle-container>  * { 
-    width: 60px;
+.controle-container {
+  width: 60px;
+  padding: 10%;
 }
 
-.add-bottom-padding{
-    padding-bottom: 10px;
+.controle-container > * {
+  width: 60px;
 }
 
-mat-radio-group mat-radio-button{
-    margin-left:10px;
+.add-bottom-padding {
+  padding-bottom: 10px;
 }
 
-label{
-    color:grey;
+mat-radio-group mat-radio-button {
+  margin-left: 10px;
 }
 
-.button-row button{
-    margin-left:7px;
-    margin-top:18%;
+label {
+  color: grey;
 }
 
+.button-row button {
+  margin-left: 7px;
+  margin-top: 18%;
+}
