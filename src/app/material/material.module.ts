@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import * as Material from "@angular/material";
+import {MatDialogModule,MatDialog,MatDialogRef} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [],
@@ -50,7 +51,10 @@ import * as Material from "@angular/material";
     Material.MatTooltipModule,
     Material.MatPaginatorModule,
     Material.MatSortModule,
-    Material.MatDialogModule
+    MatDialogModule
+  ],
+  providers: [
+    {provide: MatDialogRef, useValue: {}},
   ]
 })
 export class MaterialModule {}

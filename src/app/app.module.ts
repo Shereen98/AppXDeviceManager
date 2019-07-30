@@ -20,7 +20,6 @@ import { AddDeviceComponent } from "./add-device/add-device.component";
 import { MatConfirmDialogComponent } from "./mat-confirm-dialog/mat-confirm-dialog.component";
 import { EditConditionComponent } from "./edit-condition/edit-condition.component";
 import { AssignDeviceComponent } from "./assign-device/assign-device.component";
-import { AssignDeviceService } from "./shared/assign-device.service";
 import { DeviceDetailsComponent } from "./device-details/device-details.component";
 import { ReturnDeviceComponent } from "./return-device/return-device.component";
 import { UserHomeComponent } from "./user-home/user-home.component";
@@ -56,7 +55,8 @@ import { AddReviewComponent } from "./add-review/add-review.component";
     NotificationService,
     UserService,
     DatePipe,
-    AssignDeviceService
+    AddDeviceComponent,
+    MaterialModule
   ],
   bootstrap: [AppComponent],
   entryComponents: [

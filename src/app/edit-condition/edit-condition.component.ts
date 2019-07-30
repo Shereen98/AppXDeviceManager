@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { DeviceService } from "../shared/device.service";
 import { MatDialogRef } from "@angular/material";
 import { NotificationService } from "../shared/notification.service";
+import { AddDeviceComponent } from "../add-device/add-device.component";
 
 @Component({
   selector: "app-edit-condition",
@@ -12,7 +13,8 @@ export class EditConditionComponent implements OnInit {
   constructor(
     private service: DeviceService,
     private notificationService: NotificationService,
-    public dialogRef: MatDialogRef<EditConditionComponent>
+    public dialogRef: MatDialogRef<EditConditionComponent>,
+    private deviceForm : AddDeviceComponent
   ) {}
 
   deviceCondition = [
@@ -25,19 +27,19 @@ export class EditConditionComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.service.form.valid) {
-      if (this.service.form.get("$key").value) {
-        this.service.updateCondition(this.service.form.value);
+    if (this.deviceForm.form.valid) {
+      if (this.deviceForm.form.get("$key").value) {
+        this.service.updateCondition(this.deviceForm.form.value);
       }
-      this.service.form.reset();
-      this.service.initializeFormGroup();
+      this.deviceForm.form.reset();
+      this.deviceForm.initializeFormGroup();
       this.notificationService.success("Condition changed !");
       this.onClose();
     }
   }
   onClose() {
-    this.service.form.reset();
-    this.service.initializeFormGroup();
+    this.deviceForm.form.reset();
+    this.deviceForm.initializeFormGroup();
     this.dialogRef.close();
   }
 }

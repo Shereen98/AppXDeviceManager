@@ -8,7 +8,7 @@
   </button> </mat-toolbar
 ><br />
 <form
-  [formGroup]="deviceService.form"
+  [formGroup]="deviceForm.form"
   class="normal-form"
   (submit)="onSubmit()"
 >
@@ -35,7 +35,7 @@
         mat-raised-button
         color="primary"
         type="submit"
-        [disabled]="deviceService.form.invalid"
+        [disabled]="deviceForm.form.invalid"
         style="margin-left:24%;width:25%"
       >
         Submit

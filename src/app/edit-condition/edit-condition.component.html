@@ -1,6 +1,6 @@
 <mat-toolbar>
   <span>{{
-    service.form.controls["$key"].value
+    deviceForm.form.controls["$key"].value
       ? "Change Device Condition"
       : "Edit Condition"
   }}</span>
@@ -15,7 +15,7 @@
     <mat-icon>cancel</mat-icon>
   </button>
 </mat-toolbar>
-<form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()">
+<form [formGroup]="deviceForm.form" class="normal-form" (submit)="onSubmit()">
   <div class="controles-container">
     <mat-form-field>
       <mat-select

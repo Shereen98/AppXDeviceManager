@@ -1,11 +1,9 @@
 import { Injectable } from "@angular/core";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { AngularFireDatabase, AngularFireList } from "@angular/fire/database";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { DatePipe } from "@angular/common";
 import { Observable } from "rxjs";
 import { Router } from "@angular/router";
-import { getMaxListeners } from "cluster";
 
 @Injectable({
   providedIn: "root"
@@ -35,24 +33,6 @@ export class UserService {
 
   userList: AngularFireList<any>;
   array = [];
-
-  form: FormGroup = new FormGroup({
-    $key: new FormControl(null),
-    username: new FormControl("", Validators.required),
-    email: new FormControl("", [Validators.required, Validators.email]),
-    type: new FormControl("", Validators.required),
-    password: new FormControl("", Validators.required)
-  });
-
-  initializeFormGroup() {
-    this.form.setValue({
-      $key: null,
-      username: "",
-      email: "",
-      type: "",
-      password: ""
-    });
-  }
 
   authUser() {
     return this.user;

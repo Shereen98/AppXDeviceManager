@@ -1,13 +1,13 @@
 <mat-toolbar>
   <span>{{
-    service.form.controls["$key"].value ? "Modify Device" : "Add a new device"
+    deviceForm.form.controls["$key"].value ? "Modify Device" : "Add a new device"
   }}</span>
   <span class="fill-remaining-space"></span>
   <button class="btn-dialog-close" mat-button (click)="onClose()" tabIndex="-1">
     <mat-icon>cancel</mat-icon>
   </button>
 </mat-toolbar>
-<form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()">
+<form [formGroup]="form" class="normal-form" (submit)="onSubmit()">
   <mat-grid-list cols="2" rowHeight="300px">
     <mat-grid-tile>
       <div class="controles-container">
@@ -69,7 +69,6 @@
         </div>
         <div style="margin-top:25px;">
           <label>Upload an Image :</label>
-          <!-- <button mat-raised-button color="basic" type="submit">Choose Image</button>-->
           <input
             type="file"
             accept="image/*"
@@ -83,7 +82,7 @@
             mat-raised-button
             color="primary"
             type="submit"
-            [disabled]="service.form.invalid"
+            [disabled]="form.invalid"
           >
             Submit
           </button>

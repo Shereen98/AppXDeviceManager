@@ -7,8 +7,8 @@ import {
   AngularFireStorageReference,
   AngularFireUploadTask
 } from "@angular/fire/storage";
-import { finalize } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: "app-add-device",
@@ -30,6 +30,28 @@ export class AddDeviceComponent implements OnInit {
     public http: HttpClient
   ) {}
 
+  form: FormGroup = new FormGroup({
+    $key: new FormControl(null),
+    barcode: new FormControl("", Validators.required),
+    name: new FormControl("", Validators.required),
+    addDate: new FormControl("", Validators.required),
+    condition: new FormControl(0, Validators.required),
+    status: new FormControl("Unassigned"),
+    image: new FormControl("")
+  });
+
+  initializeFormGroup() {
+    this.form.setValue({
+      $key: null,
+      barcode: "",
+      name: "",
+      addDate: "",
+      condition: 0,
+      status: "Unassigned",
+      image: ""
+    });
+  }
+
   deviceCondition = [
     { id: 1, value: "Good" },
     { id: 2, value: "Average" },
@@ -43,38 +65,18 @@ export class AddDeviceComponent implements OnInit {
   }
 
   onClear() {
-    this.service.form.reset();
-    this.service.initializeFormGroup();
+    this.form.reset();
+    this.initializeFormGroup();
   }
-
-  /*onSubmit(){
-    if(this.service.form.valid){
-      if (!this.service.form.get('$key').value){
-        this.service.addDevice(this.service.form.value);
-        this.notificationService.success('Device added successfully !');
-      }
-      else{
-        this.service.updateCondition(this.service.form.value);
-        this.notificationService.success('Condition changed successfully !');
-      }
-      this.service.form.reset();
-      this.service.initializeFormGroup();
-      this.onClose();
-      //this.service.addDevice(this.service.form.value);
-      //this.service.form.reset();
-      //this.service.initializeFormGroup();
-      
-    }
-  }*/
 
   onSubmit() {
     try {
-      if (this.service.form.valid) {
+      if (this.form.valid) {
         this.onUpload(event);
-        this.service.addDevice(this.service.form.value);
+        this.service.addDevice(this.form.value);
         this.notificationService.success("Device Added successfully !");
-        this.service.form.reset();
-        this.service.initializeFormGroup();
+        this.form.reset();
+        this.initializeFormGroup();
         this.onClose();
       }
     } catch (error) {
@@ -83,8 +85,8 @@ export class AddDeviceComponent implements OnInit {
   }
 
   onClose() {
-    this.service.form.reset();
-    this.service.initializeFormGroup();
+    this.form.reset();
+    this.initializeFormGroup();
     this.dialogRef.close();
   }
 
@@ -97,5 +99,10 @@ export class AddDeviceComponent implements OnInit {
       .substring(2);
     this.ref = this.storage.ref(id);
     this.task = this.ref.put(this.selectedImage);
+  }
+
+  populateForm(device) {
+    this.form.patchValue(device);
+    debugger;
   }
 }

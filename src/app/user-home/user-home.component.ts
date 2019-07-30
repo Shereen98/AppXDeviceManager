@@ -12,7 +12,6 @@ import { NotificationService } from "../shared/notification.service";
 import { DialogService } from "../shared/dialog.service";
 import { EditConditionComponent } from "../edit-condition/edit-condition.component";
 import { AssignDeviceComponent } from "../assign-device/assign-device.component";
-import { AssignDeviceService } from "../shared/assign-device.service";
 import { ReturnDeviceComponent } from "../return-device/return-device.component";
 import { ActivatedRoute } from "@angular/router";
 import { AngularFireDatabase, AngularFireList } from "@angular/fire/database";
@@ -25,12 +24,12 @@ import { AngularFireDatabase, AngularFireList } from "@angular/fire/database";
 export class UserHomeComponent implements OnInit {
   constructor(
     private service: DeviceService,
-    private assignService: AssignDeviceService,
     private dialog: MatDialog,
     private notificationService: NotificationService,
     private dialogService: DialogService,
     private route: ActivatedRoute,
-    private firebase: AngularFireDatabase
+    private firebase: AngularFireDatabase,
+    private deviceForm : AddDeviceComponent
   ) {}
 
   devices: any;
@@ -67,7 +66,7 @@ export class UserHomeComponent implements OnInit {
   }
 
   onCreate() {
-    this.service.initializeFormGroup();
+    this.deviceForm.initializeFormGroup();
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
@@ -77,7 +76,7 @@ export class UserHomeComponent implements OnInit {
   }
 
   editCondition(row) {
-    this.service.populateForm(row);
+    this.deviceForm.populateForm(row);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
@@ -111,7 +110,7 @@ export class UserHomeComponent implements OnInit {
 
   returnDevice(row) {
     try {
-      this.service.populateForm(row);
+      this.deviceForm.populateForm(row);
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = false;
       dialogConfig.autoFocus = true;

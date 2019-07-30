@@ -4,7 +4,7 @@
     <h1>&nbsp; AppX Users</h1>
   </div>
 
-  <form [formGroup]="userService.form" class="normal-form" (click)="onSubmit()">
+  <form [formGroup]="form" class="normal-form" (click)="onSubmit()">
     <div class="controles-container">
       <input type="hidden" formControlName="$key" />
       <mat-form-field>
@@ -40,7 +40,7 @@
         mat-raised-button
         type="submit"
         color="primary"
-        [disabled]="userService.form.invalid"
+        [disabled]="form.invalid"
         style="margin-left:3%;width:6%"
       >
         Add

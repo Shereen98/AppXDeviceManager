@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { AuthService } from "../shared/auth.service";
 import { UserService } from "../shared/user.service";
 import { Router } from "@angular/router";
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: "app-login",
@@ -14,7 +14,6 @@ export class LoginComponent implements OnInit {
   errorMsg: string;
 
   constructor(
-    private authService: AuthService,
     private router: Router,
     private userService: UserService
   ) {}
@@ -23,14 +22,21 @@ export class LoginComponent implements OnInit {
     debugger;
     this.userService.getUsers();
   }
+  form: FormGroup = new FormGroup({
+    $key: new FormControl(null),
+    email: new FormControl("", [Validators.required, Validators.email]),
+    password: new FormControl("", Validators.required)
+  });
+
+  initializeFormGroup() {
+    this.form.setValue({
+      $key: null,
+      email: "",
+      password: ""
+    });
+  }
 
   onSubmit() {
     this.userService.signIn(this.email, this.password);
   }
-
-  /*logIn(){
-    this.authService.login({username:this.username, password: this.password})
-    .then(resolve => this.router.navigate(['device-list']))
-    .catch(error=> this.errorMsg=error.message);
-  }*/
 }

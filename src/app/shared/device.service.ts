@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
 import {
   AngularFireDatabase,
   AngularFireList,
@@ -8,8 +7,6 @@ import {
 import { DatePipe } from "@angular/common";
 import { UserService } from "./user.service";
 import { AngularFireStorage } from "@angular/fire/storage";
-import * as firebase from "firebase";
-import { AssignDeviceService } from "../shared/assign-device.service";
 
 @Injectable({
   providedIn: "root"
@@ -21,7 +18,7 @@ export class DeviceService {
     private userService: UserService,
     private storage: AngularFireStorage
   ) {
-    this.deviceList = this.firebase.list("devices");
+   /* this.deviceList = this.firebase.list("devices");
     this.deviceList.snapshotChanges().subscribe(list => {
       this.array = list.map(item => {
         return {
@@ -29,7 +26,7 @@ export class DeviceService {
           ...item.payload.val()
         };
       });
-    });
+    });*/
   }
 
   deviceList: AngularFireList<any>;
@@ -38,31 +35,6 @@ export class DeviceService {
   device: AngularFireObject<any>;
   fetchedDevice = null;
   deviceId;
-
-  private basePath: string = "/images";
-  private uploadTask: firebase.storage.UploadTask;
-
-  form: FormGroup = new FormGroup({
-    $key: new FormControl(null),
-    barcode: new FormControl("", Validators.required),
-    name: new FormControl("", Validators.required),
-    addDate: new FormControl("", Validators.required),
-    condition: new FormControl(0, Validators.required),
-    status: new FormControl("Unassigned"),
-    image: new FormControl("")
-  });
-
-  initializeFormGroup() {
-    this.form.setValue({
-      $key: null,
-      barcode: "",
-      name: "",
-      addDate: "",
-      condition: 0,
-      status: "Unassigned",
-      image: ""
-    });
-  }
 
   getDevices() {
     this.deviceList = this.firebase.list("devices");
@@ -127,9 +99,5 @@ export class DeviceService {
     this.deviceList.remove($key);
   }
 
-  populateForm(device) {
-    // debugger;
-    this.form.patchValue(device);
-    debugger;
-  }
+
 }

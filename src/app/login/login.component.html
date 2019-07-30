@@ -1,4 +1,4 @@
-<form [formGroup]="authService.form" class="normal-form" (submit)="onSubmit()">
+<form [formGroup]="form" class="normal-form" (submit)="onSubmit()">
   <div class="controles-container" style="border-block-color: black">
     <input type="hidden" formControlName="$key" />
     <br /><br /><br /><br />
@@ -25,7 +25,7 @@
       <button
         mat-raised-button
         type="submit"
-        [disabled]="authService.invalid"
+        [disabled]="form.invalid"
         style="margin-left:39%;width:20%;background-color: darkblue;color:white"
       >
         Login

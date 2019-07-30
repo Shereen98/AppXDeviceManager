@@ -9,6 +9,7 @@ import {
 } from "@angular/material";
 import { NotificationService } from "../shared/notification.service";
 import { DialogService } from "../shared/dialog.service";
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 @Component({
   selector: "app-user-list",
   templateUrl: "./user-list.component.html",
@@ -53,18 +54,36 @@ export class UserListComponent implements OnInit {
     });
   }
 
+  form: FormGroup = new FormGroup({
+    $key: new FormControl(null),
+    username: new FormControl("", Validators.required),
+    email: new FormControl("", [Validators.required, Validators.email]),
+    type: new FormControl("", Validators.required),
+    password: new FormControl("", Validators.required)
+  });
+
+  initializeFormGroup() {
+    this.form.setValue({
+      $key: null,
+      username: "",
+      email: "",
+      type: "",
+      password: ""
+    });
+  }
+
   onClear() {
-    this.userService.form.reset();
-    this.userService.initializeFormGroup();
+    this.form.reset();
+    this.initializeFormGroup();
   }
 
   onSubmit() {
-    if (this.userService.form.valid) {
-      this.userService.addUser(this.userService.form.value);
+    if (this.form.valid) {
+      this.userService.addUser(this.form.value);
       debugger;
       this.userService.signUp(this.email, this.password);
-      this.userService.form.reset();
-      this.userService.initializeFormGroup();
+      this.form.reset();
+      this.initializeFormGroup();
       this.notificationService.success("User added successfully !");
     }
   }

@@ -5,6 +5,7 @@ import { MatDialogRef } from "@angular/material";
 import { MAT_DIALOG_DATA } from "@angular/material";
 import { AngularFireList, AngularFireDatabase } from "@angular/fire/database";
 import { DatePipe } from "@angular/common";
+import { AddDeviceComponent} from "../add-device/add-device.component";
 
 @Component({
   selector: "app-return-device",
@@ -20,7 +21,8 @@ export class ReturnDeviceComponent implements OnInit {
     private notificationService: NotificationService,
     public dialogRef: MatDialogRef<ReturnDeviceComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private deviceForm : AddDeviceComponent
   ) {
     this.returnDevice = data;
   }
@@ -37,14 +39,14 @@ export class ReturnDeviceComponent implements OnInit {
 
   onSubmit() {
     try {
-      if (this.deviceService.form.valid) {
-        this.deviceService.returnStatus(this.deviceService.form.value);
-        this.deviceService.updateCondition(this.deviceService.form.value);
-        this.addReturnDevice(this.deviceService.form.value);
+      if (this.deviceForm.form.valid) {
+        this.deviceService.returnStatus(this.deviceForm.form.value);
+        this.deviceService.updateCondition(this.deviceForm.form.value);
+        this.addReturnDevice(this.deviceForm.form.value);
         //this.service.populateForm(this.service.form.value);
         this.notificationService.success("Device returned successfully !");
-        this.deviceService.form.reset();
-        this.deviceService.initializeFormGroup();
+        this.deviceForm.form.reset();
+        this.deviceForm.initializeFormGroup();
         this.onClose();
       }
     } catch (error) {
@@ -53,8 +55,8 @@ export class ReturnDeviceComponent implements OnInit {
   }
 
   onClose() {
-    this.deviceService.form.reset();
-    this.deviceService.initializeFormGroup();
+    this.deviceForm.form.reset();
+    this.deviceForm.initializeFormGroup();
     this.dialogRef.close();
   }
 
