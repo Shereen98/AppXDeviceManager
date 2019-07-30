@@ -1,9 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { UserService } from "../shared/user.service";
-//import {AngularFireDatabase,AngularFireList} from '@angular/fire/database';
-import { DatePipe } from "@angular/common";
 import { AngularFireStorage } from "@angular/fire/storage";
-import * as firebase from "firebase";
 import { DeviceService } from "../shared/device.service";
 import { ActivatedRoute } from "@angular/router";
 import { AngularFireDatabase, AngularFireList } from "@angular/fire/database";
@@ -25,6 +22,7 @@ export class DeviceDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    /* retrieves the data of the device with the key passed as the route parameter */
     try {
       this.route.params.subscribe(params => {
         //this.deviceList= this.firebase.list('devices/' + params['deviceKey'])

@@ -29,7 +29,7 @@ export class DeviceListComponent implements OnInit {
     private notificationService: NotificationService,
     private dialogService: DialogService,
     private firebase: AngularFireDatabase,
-    private deviceForm : AddDeviceComponent
+    private deviceForm: AddDeviceComponent
   ) {}
 
   devices: any;
@@ -96,9 +96,7 @@ export class DeviceListComponent implements OnInit {
   }
 
   assignDevice(row) {
-    //debugger;
     //this.service.initializeFormGroup();
-    //this.service.populateForm(row);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
@@ -125,7 +123,6 @@ export class DeviceListComponent implements OnInit {
 
   addReview(row) {
     try {
-      //this.service.populateForm(row);
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = false;
       dialogConfig.autoFocus = true;
