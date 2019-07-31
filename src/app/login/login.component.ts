@@ -19,15 +19,17 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    debugger;
     this.userService.getUsers();
   }
+
+  /* creates a new Form group object and passes the form controls */
   form: FormGroup = new FormGroup({
     $key: new FormControl(null),
     email: new FormControl("", [Validators.required, Validators.email]),
     password: new FormControl("", Validators.required)
   });
 
+  /* initializes the form group values */
   initializeFormGroup() {
     this.form.setValue({
       $key: null,
@@ -36,6 +38,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  /* submits the email and password of the user to firebase aunthentication by calling the sign in method in the user.service */
   onSubmit() {
     this.userService.signIn(this.email, this.password);
   }

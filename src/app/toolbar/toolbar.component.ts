@@ -14,7 +14,8 @@ export class ToolbarComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   ngOnInit() {
-    this.user = this.userService.authUser();
+    this.user = this.userService.authUser(); //stores the user details retrieved from firebase auhtnetication in the user observable
+    //subscirbes the observable and stores the email of the user in the userEmail variable
     this.user.subscribe(user => {
       if (user) {
         this.userEmail = user.email;
@@ -22,6 +23,7 @@ export class ToolbarComponent implements OnInit {
     });
   }
 
+  /* calls the signOut function from the user.service  */
   logout() {
     this.userService.signOut();
   }

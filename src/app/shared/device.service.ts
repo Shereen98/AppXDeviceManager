@@ -17,17 +17,7 @@ export class DeviceService {
     private datePipe: DatePipe,
     private userService: UserService,
     private storage: AngularFireStorage
-  ) {
-   /* this.deviceList = this.firebase.list("devices");
-    this.deviceList.snapshotChanges().subscribe(list => {
-      this.array = list.map(item => {
-        return {
-          $key: item.key,
-          ...item.payload.val()
-        };
-      });
-    });*/
-  }
+  ) {}
 
   deviceList: AngularFireList<any>;
   assignHistoryList: AngularFireList<any>;
@@ -36,9 +26,9 @@ export class DeviceService {
   fetchedDevice = null;
   deviceId;
 
+  /* retieves the device details from the firebase as an observable from angular frie list */
   getDevices() {
     this.deviceList = this.firebase.list("devices");
-    // this.assignHistoryList=this.firebase.list('devices');
     return this.deviceList.snapshotChanges();
   }
 
@@ -46,6 +36,7 @@ export class DeviceService {
     //firebase pass by id ('devices/:id');
   }
 
+  /* pushes the object containing the device details into the angular firelist */
   addDevice(device) {
     this.deviceList.push({
       barcode: device.barcode,
@@ -60,15 +51,16 @@ export class DeviceService {
     });
   }
 
+  /* pushes the object containing the review details into the angular firelist */
   addReview(device) {
     this.deviceList.push({
       review: device.review
     });
   }
 
+  /* pushes the object containing the assign details into the angular firelist */
   addAssignHistory(device) {
     this.deviceList.push({
-      //assignHistory: device.assignHistory,
       username: device.username,
       assignDate:
         device.assignDate == ""
@@ -77,6 +69,7 @@ export class DeviceService {
     });
   }
 
+  /* calls the update function from angular fru*/
   updateCondition(device) {
     this.deviceList.update(device.$key, {
       condition: device.condition

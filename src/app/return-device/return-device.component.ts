@@ -27,6 +27,7 @@ export class ReturnDeviceComponent implements OnInit {
     this.returnDevice = data;
   }
 
+  /* array holds the values of the condtions which is passed to the static menu of the form */
   deviceCondition = [
     { id: 1, value: "Good" },
     { id: 2, value: "Average" },
@@ -37,6 +38,7 @@ export class ReturnDeviceComponent implements OnInit {
     this.deviceService.getDevices();
   }
 
+  /* submits the form data containing the retun device details to firebase and updates the relevant fields */
   onSubmit() {
     try {
       if (this.deviceForm.form.valid) {
@@ -54,14 +56,15 @@ export class ReturnDeviceComponent implements OnInit {
     }
   }
 
+  /* closes the dialog box */
   onClose() {
     this.deviceForm.form.reset();
     this.deviceForm.initializeFormGroup();
     this.dialogRef.close();
   }
 
+  /* gets the return device detials as an observable */
   getReturnDevices() {
-    //const obj = this.firebase.database.ref('devices/assign-history');
     try {
       this.returnDeviceList = this.firebase.list(
         "devices/" + this.returnDevice.$key + "/return-history"
@@ -72,6 +75,7 @@ export class ReturnDeviceComponent implements OnInit {
     }
   }
 
+  /* adds return device details to the firebase database */
   addReturnDevice(returnDevice) {
     this.returnDeviceList.push({
       //username: returnDevice.assignHistory.username,
