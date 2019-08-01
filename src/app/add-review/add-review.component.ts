@@ -29,7 +29,7 @@ export class AddReviewComponent implements OnInit {
     this.deviceService.getDevices(); //calls the getDevices() function from the device.service
   }
 
-  /* Creates a new FormGroup object and passes the form controls */
+  /* defines a property of type formGroup and passes the object containing form controls*/
   form: FormGroup = new FormGroup({
     $key: new FormControl(null),
     review: new FormControl("")

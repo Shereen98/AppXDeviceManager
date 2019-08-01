@@ -26,14 +26,10 @@ export class DeviceService {
   fetchedDevice = null;
   deviceId;
 
-  /* retieves the device details from the firebase as an observable from angular frie list */
+  /* retieves the device details from the firebase as an observable from angular fire list */
   getDevices() {
     this.deviceList = this.firebase.list("devices");
     return this.deviceList.snapshotChanges();
-  }
-
-  getSingleDevice($key) {
-    //firebase pass by id ('devices/:id');
   }
 
   /* pushes the object containing the device details into the angular firelist */

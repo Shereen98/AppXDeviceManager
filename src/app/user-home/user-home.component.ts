@@ -109,7 +109,6 @@ export class UserHomeComponent implements OnInit {
   }
 
   returnDevice(row) {
-    try {
       this.deviceForm.populateForm(row);
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = false;
@@ -118,8 +117,5 @@ export class UserHomeComponent implements OnInit {
       dialogConfig.height = "50%";
       dialogConfig.data = row;
       this.dialog.open(ReturnDeviceComponent, dialogConfig);
-    } catch (error) {
-      console.log(error);
-    }
   }
 }

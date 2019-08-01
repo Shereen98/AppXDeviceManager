@@ -49,7 +49,6 @@ export class DeviceListComponent implements OnInit {
         };
       });
       this.listData = new MatTableDataSource(array);
-      //console.log(this.listData);
       this.listData.sort = this.sort;
       this.listData.paginator = this.paginator;
     });

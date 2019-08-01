@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { DeviceService } from "../shared/device.service";
 import { NotificationService } from "../shared/notification.service";
-import { MatDialogRef } from "@angular/material";
+import { MatDialogRef } from "@angular/material/dialog";
 import {
   AngularFireStorage,
   AngularFireStorageReference,
@@ -30,7 +30,7 @@ export class AddDeviceComponent implements OnInit {
     public http: HttpClient
   ) {}
 
-  /* Creates a new FormGroup object and passes the form controls */
+  /* defines a property of type formGroup and passes the object containing form controls*/
   form: FormGroup = new FormGroup({
     $key: new FormControl(null),
     barcode: new FormControl("", Validators.required),

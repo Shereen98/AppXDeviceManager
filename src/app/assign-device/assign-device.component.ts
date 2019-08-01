@@ -32,9 +32,7 @@ export class AssignDeviceComponent implements OnInit {
     this.assignDevice = data;
   }
 
-  /**
-   * creates a formGroup object and passes the form controls
-   */
+ /* defines a property of type formGroup and passes the object containing form controls*/
   form: FormGroup = new FormGroup({
     $key: new FormControl(null),
     username: new FormControl("", Validators.required),
@@ -48,7 +46,6 @@ export class AssignDeviceComponent implements OnInit {
 
   /* submits the assigned details to the firebase database after checking the validity*/
   onSubmit() {
-    try {
       if (this.form.valid) {
         this.service.updateStatus(this.deviceForm.form.value); // changes the value of the status to assigned
         this.deviceForm.populateForm(this.deviceForm.form.value); //calls the populateForm function and gets the details of the respective device which is to be assigned
@@ -58,9 +55,6 @@ export class AssignDeviceComponent implements OnInit {
         this.initializeFormGroup();
         this.onClose();
       }
-    } catch (error) {
-      console.log(error);
-    }
   }
 
   /* closes the dialog box which contains the form after assigning the device successfully */

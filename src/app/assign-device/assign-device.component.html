@@ -6,12 +6,12 @@
   </button> </mat-toolbar
 ><br />
 <form
-  [formGroup]="assignService.form"
+  [formGroup]="form"
   class="normal-form"
   (submit)="onSubmit()"
 >
   <div class="controles-container">
-    <form [formGroup]="form" class="normal-form" (submit)="onSubmit()">
+    <form [formGroup]="deviceForm" class="normal-form" (submit)="onSubmit()">
       <input type="hidden" formControlName="barcode" />
     </form>
     <input type="hidden" formControlName="$key" />
@@ -43,7 +43,7 @@
         color="primary"
         type="submit"
         [disabled]="form.invalid"
-        style="margin-left:24%;width:25%"
+        style="margin-left:24%;width:25%;background-color:darkblue;color:white"
       >
         Submit
       </button>

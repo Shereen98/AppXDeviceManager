@@ -4,12 +4,12 @@ import {
   MatTableDataSource,
   MatSort,
   MatPaginator,
-  MatDialog,
-  MatDialogConfig
+  MatDialog
 } from "@angular/material";
 import { NotificationService } from "../shared/notification.service";
 import { DialogService } from "../shared/dialog.service";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { Observable } from 'rxjs';
 @Component({
   selector: "app-user-list",
   templateUrl: "./user-list.component.html",
@@ -20,9 +20,9 @@ export class UserListComponent implements OnInit {
   email: string;
   password: string;
   searchKey: string;
+  user: Observable<firebase.User>;
   constructor(
     private userService: UserService,
-    private dialog: MatDialog,
     private notificationService: NotificationService,
     private dialogService: DialogService
   ) {}
@@ -42,6 +42,7 @@ export class UserListComponent implements OnInit {
   ];
 
   ngOnInit() {
+    
     //subscribes the observable containing the user detials and stores the data in an array
     this.userService.getUsers().subscribe(list => {
       let array = list.map(item => {

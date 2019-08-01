@@ -40,7 +40,6 @@ export class ReturnDeviceComponent implements OnInit {
 
   /* submits the form data containing the retun device details to firebase and updates the relevant fields */
   onSubmit() {
-    try {
       if (this.deviceForm.form.valid) {
         this.deviceService.returnStatus(this.deviceForm.form.value);
         this.deviceService.updateCondition(this.deviceForm.form.value);
@@ -51,9 +50,6 @@ export class ReturnDeviceComponent implements OnInit {
         this.deviceForm.initializeFormGroup();
         this.onClose();
       }
-    } catch (error) {
-      console.log(error);
-    }
   }
 
   /* closes the dialog box */
@@ -65,14 +61,10 @@ export class ReturnDeviceComponent implements OnInit {
 
   /* gets the return device detials as an observable */
   getReturnDevices() {
-    try {
       this.returnDeviceList = this.firebase.list(
         "devices/" + this.returnDevice.$key + "/return-history"
       );
       return this.returnDeviceList.snapshotChanges();
-    } catch (error) {
-      console.log(error);
-    }
   }
 
   /* adds return device details to the firebase database */

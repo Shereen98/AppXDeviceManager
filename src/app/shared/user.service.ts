@@ -11,6 +11,9 @@ import { Router } from "@angular/router";
 export class UserService {
   user: Observable<firebase.User>;
   authState: any;
+  userList: AngularFireList<any>;
+  array = [];
+  userType: String;
 
   constructor(
     private firebase: AngularFireDatabase,
@@ -19,20 +22,7 @@ export class UserService {
     private router: Router
   ) {
     this.user = auth.authState;
-
-    this.userList = this.firebase.list("users");
-    this.userList.snapshotChanges().subscribe(list => {
-      this.array = list.map(item => {
-        return {
-          $key: item.key,
-          ...item.payload.val()
-        };
-      });
-    });
   }
-
-  userList: AngularFireList<any>;
-  array = [];
 
   authUser() {
     return this.user;
@@ -67,13 +57,23 @@ export class UserService {
       .signInWithEmailAndPassword(email, password)
       .then(res => {
         this.authState = res;
-        if (email == "admin@gmail.com") {
-          this.router.navigate(["device-list"]);
-        } else {
-          this.router.navigate(["user-home"]);
-        }
-
-        console.log("Successfully signed in!", this.authState);
+        this.getUsers().subscribe(list => {
+          let array = list.map(item => {
+            return {
+              $key: item.key,
+              ...item.payload.val()
+            };
+          });
+          console.log(array);
+          for (var users of array)
+            if (email == users.email) {
+              if (users.type == "Admin") {
+                this.router.navigate(["device-list"]);
+              } else {
+                this.router.navigate(["user-home"]);
+              }
+            }
+        });
       })
       .catch(err => {
         console.log("Something is wrong: ", err.message);

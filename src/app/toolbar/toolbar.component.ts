@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
 import { UserService } from "../shared/user.service";
+import { AngularFireList, AngularFireDatabase } from '@angular/fire/database';
 
 @Component({
   selector: "app-toolbar",
@@ -10,6 +11,7 @@ import { UserService } from "../shared/user.service";
 export class ToolbarComponent implements OnInit {
   user: Observable<firebase.User>;
   userEmail: string;
+  userType: string;
 
   constructor(private userService: UserService) {}
 
@@ -20,6 +22,16 @@ export class ToolbarComponent implements OnInit {
       if (user) {
         this.userEmail = user.email;
       }
+    });
+
+    this.userService.getUsers().subscribe(list => {
+      let array = list.map(item => {
+        return {
+          $key: item.key,
+          ...item.payload.val()
+        };
+      });
+       return array;
     });
   }
 

@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { UserService } from "../shared/user.service";
 import { Router } from "@angular/router";
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { AngularFireList } from '@angular/fire/database';
 
 @Component({
   selector: "app-login",
@@ -13,16 +14,13 @@ export class LoginComponent implements OnInit {
   password: string;
   errorMsg: string;
 
-  constructor(
-    private router: Router,
-    private userService: UserService
-  ) {}
+  constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit() {
     this.userService.getUsers();
   }
 
-  /* creates a new Form group object and passes the form controls */
+  /* defines a property of type formGroup and passes the object containing form controls*/
   form: FormGroup = new FormGroup({
     $key: new FormControl(null),
     email: new FormControl("", [Validators.required, Validators.email]),

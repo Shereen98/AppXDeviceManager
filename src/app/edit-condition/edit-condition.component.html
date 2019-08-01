@@ -1,19 +1,9 @@
 <mat-toolbar>
-  <span>{{
-    deviceForm.form.controls["$key"].value
-      ? "Change Device Condition"
-      : "Edit Condition"
-  }}</span>
+  <span>Edit condition</span>
   <span class="fill-remaining-space" style="width:50%;"></span>
-  <button
-    class="btn-dialog-close"
-    mat-stroked-button
-    (click)="onClose()"
-    tabIndex="-1"
-    style="width:5px"
-  >
-    <mat-icon>cancel</mat-icon>
-  </button>
+    <button class="btn-dialog-close" mat-button (click)="onClose()" tabIndex="-1">
+      <mat-icon>cancel</mat-icon>
+    </button>
 </mat-toolbar>
 <form [formGroup]="deviceForm.form" class="normal-form" (submit)="onSubmit()">
   <div class="controles-container">
