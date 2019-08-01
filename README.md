@@ -14,4 +14,4 @@ Nodejs > 8
   
 ## Run test suite
 
-  npm test
+  ng test
