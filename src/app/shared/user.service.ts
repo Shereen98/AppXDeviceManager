@@ -22,7 +22,18 @@ export class UserService {
     private router: Router
   ) {
     this.user = auth.authState;
+    this.userList = this.firebase.list("users");
+    this.userList.snapshotChanges().subscribe(
+      list => {
+       this.array = list.map(item => {
+          return {
+            $key: item.key,
+            ...item.payload.val()
+          };
+        });
+      });
   }
+ 
 
   authUser() {
     return this.user;
