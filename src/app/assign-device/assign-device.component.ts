@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { DeviceService } from "../shared/device.service";
-import { UserService } from "../shared/user.service";
+import {UserService} from "../shared/user.service"
 import { NotificationService } from "../shared/notification.service";
 import { MatDialogRef } from "@angular/material";
 import { AddDeviceComponent } from "../add-device/add-device.component";
@@ -18,13 +18,14 @@ export class AssignDeviceComponent implements OnInit {
   assignDevice: any;
   deviceKey: [];
   assignDeviceList: AngularFireList<any>;
+  userList : AngularFireList<any>;
 
   constructor(
     private firebase: AngularFireDatabase,
     private deviceForm: AddDeviceComponent,
     private service: DeviceService,
     private notificationService: NotificationService,
-    private userService: UserService,
+    private userService : UserService,
     public dialogRef: MatDialogRef<AssignDeviceComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private datePipe: DatePipe

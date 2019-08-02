@@ -11,9 +11,6 @@
   (submit)="onSubmit()"
 >
   <div class="controles-container">
-    <form [formGroup]="deviceForm" class="normal-form" (submit)="onSubmit()">
-      <input type="hidden" formControlName="barcode" />
-    </form>
     <input type="hidden" formControlName="$key" />
     <mat-form-field>
       <mat-select formControlName="username" placeholder="Username*">

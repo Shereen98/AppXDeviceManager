@@ -39,5 +39,7 @@ export class LoginComponent implements OnInit {
   /* submits the email and password of the user to firebase aunthentication by calling the sign in method in the user.service */
   onSubmit() {
     this.userService.signIn(this.email, this.password);
+    this.form.reset(); //resets the form fields
+    this.initializeFormGroup(); //initializes the form
   }
 }
