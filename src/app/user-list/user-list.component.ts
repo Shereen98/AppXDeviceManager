@@ -1,15 +1,19 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, Inject } from "@angular/core";
 import { UserService } from "../shared/user.service";
 import {
   MatTableDataSource,
   MatSort,
   MatPaginator,
-  MatDialog
+  MatDialog,
+  MatDialogConfig,
+  MAT_DIALOG_DATA
 } from "@angular/material";
 import { NotificationService } from "../shared/notification.service";
 import { DialogService } from "../shared/dialog.service";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Observable } from 'rxjs';
+import { ResetPasswordComponent } from '../reset-password/reset-password.component';
+
 @Component({
   selector: "app-user-list",
   templateUrl: "./user-list.component.html",
@@ -17,6 +21,7 @@ import { Observable } from 'rxjs';
 })
 export class UserListComponent implements OnInit {
   listData: MatTableDataSource<any>;
+  users:object[];
   email: string;
   password: string;
   searchKey: string;
@@ -24,7 +29,8 @@ export class UserListComponent implements OnInit {
   constructor(
     private userService: UserService,
     private notificationService: NotificationService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private dialog: MatDialog,
   ) {}
 
   @ViewChild(MatSort, null) sort: MatSort;
@@ -37,7 +43,6 @@ export class UserListComponent implements OnInit {
     "username",
     "type",
     "email",
-    "space",
     "actions"
   ];
 
@@ -117,4 +122,24 @@ export class UserListComponent implements OnInit {
   applyFilter() {
     this.listData.filter = this.searchKey.trim().toLowerCase();
   }
-}
+
+ /* resetPassword(row){
+      this.userService.resetPassword(row.data['email'])
+      .then(
+        () => alert('A password reset link has been sent to your email address'), 
+        (rejectionReason) => alert(rejectionReason)) 
+      .catch(e => alert('An error occurred while attempting to reset your password')); 
+    }*/
+    resetPassword(row){
+    const dialogConfig = new MatDialogConfig(); //creates a new MatDialogConfig object
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "40%";
+    dialogConfig.height = "70%;";
+    dialogConfig.data = row;
+    this.dialog.open(ResetPasswordComponent, dialogConfig);
+    }
+    
+  }
+
+

@@ -5,11 +5,7 @@
     <mat-icon>cancel</mat-icon>
   </button> </mat-toolbar
 ><br />
-<form
-  [formGroup]="form"
-  class="normal-form"
-  (submit)="onSubmit()"
->
+<form [formGroup]="form" class="normal-form" (submit)="onSubmit()">
   <div class="controles-container">
     <input type="hidden" formControlName="$key" />
     <mat-form-field>

@@ -87,11 +87,11 @@
           <button
             mat-raised-button
             style="margin-left:5px;background-color:silver"
-            matTooltip="Add a review for the device"
+            matTooltip="Add a comment for the device"
+            (click)="addReview(row)"
           >
-            Add Review
+            Add Comment
           </button>
-          <!--<button mat-icon-button matTooltip="Remove the device" (click)="onDelete(row.$key)"><mat-icon>delete</mat-icon></button>-->
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="loading">

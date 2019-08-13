@@ -1,7 +1,8 @@
 <form [formGroup]="form" class="normal-form" (submit)="onSubmit()">
   <div class="controles-container" style="border-block-color: black">
     <input type="hidden" formControlName="$key" />
-    <br /><br /><br /><br />
+    <br><br>
+
     <mat-form-field>
       <input
         [(ngModel)]="email"
@@ -21,7 +22,7 @@
       />
       <mat-error>This field is mandatory.</mat-error> </mat-form-field
     ><br />
-    <div class="button-row">
+    <div class="button-row" style="padding-bottom:5%">
       <button
         mat-raised-button
         type="submit"

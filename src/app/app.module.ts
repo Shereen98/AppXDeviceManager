@@ -24,6 +24,10 @@ import { DeviceDetailsComponent } from "./device-details/device-details.componen
 import { ReturnDeviceComponent } from "./return-device/return-device.component";
 import { UserHomeComponent } from "./user-home/user-home.component";
 import { AddReviewComponent } from "./add-review/add-review.component";
+import { ResetPasswordComponent } from "./reset-password/reset-password.component";
+import { AuthGuard } from "./shared/auth.guard";
+import { NormalUserGuard } from './shared/normal-user.guard';
+import { UserTypeGuard } from './shared/user-type.guard';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,8 @@ import { AddReviewComponent } from "./add-review/add-review.component";
     MatConfirmDialogComponent,
     DeviceDetailsComponent,
     UserHomeComponent,
-    AddReviewComponent
+    AddReviewComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +56,9 @@ import { AddReviewComponent } from "./add-review/add-review.component";
     FormsModule
   ],
   providers: [
+    AuthGuard,
+    NormalUserGuard,
+    UserTypeGuard,
     DeviceService,
     NotificationService,
     UserService,
@@ -66,7 +74,8 @@ import { AddReviewComponent } from "./add-review/add-review.component";
     AssignDeviceComponent,
     ReturnDeviceComponent,
     AddReviewComponent,
-    DeviceDetailsComponent
+    DeviceDetailsComponent,
+    ResetPasswordComponent
   ]
 })
 export class AppModule {}

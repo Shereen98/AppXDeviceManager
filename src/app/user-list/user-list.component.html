@@ -122,17 +122,18 @@
           <button
             mat-icon-button
             matTooltip="Edit user details"
-            style="margin-left:50%"
+            style="margin-left:30%"
           >
             <mat-icon>edit</mat-icon>
           </button>
           <!--<button mat-raised-button style="background-color:silver;cursor: pointer;"matTooltip="Edit user details" (click)="editCondition(row.$key)">Edit User</button>-->
           <button
             mat-icon-button
-            matTooltip="Remove the user"
-            (click)="onDelete(row.$key)"
+            matTooltip="Send email to reset the password"
+            (click)="resetPassword(row)"
+            style="margin-left:10%"
           >
-            <mat-icon>delete</mat-icon>
+           Reset Password
           </button>
         </mat-cell>
       </ng-container>

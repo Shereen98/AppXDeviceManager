@@ -15,6 +15,7 @@ import { AssignDeviceComponent } from "../assign-device/assign-device.component"
 import { ReturnDeviceComponent } from "../return-device/return-device.component";
 import { ActivatedRoute } from "@angular/router";
 import { AngularFireDatabase, AngularFireList } from "@angular/fire/database";
+import { AddReviewComponent } from '../add-review/add-review.component';
 
 @Component({
   selector: "app-user-home",
@@ -96,9 +97,6 @@ export class UserHomeComponent implements OnInit {
   }
 
   assignDevice(row) {
-    //debugger;
-    //this.service.initializeFormGroup();
-    //this.service.populateForm(row);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
@@ -117,5 +115,20 @@ export class UserHomeComponent implements OnInit {
       dialogConfig.height = "50%";
       dialogConfig.data = row;
       this.dialog.open(ReturnDeviceComponent, dialogConfig);
+  }
+
+  /* opens up the dialog box which contains a field to add reviews to a particular object */
+  addReview(row) {
+    try {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = false;
+      dialogConfig.autoFocus = true;
+      dialogConfig.width = "50%";
+      dialogConfig.height = "50%";
+      dialogConfig.data = row; //conatins the data of the device selected
+      this.dialog.open(AddReviewComponent, dialogConfig);
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

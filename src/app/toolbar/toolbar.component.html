@@ -1,6 +1,6 @@
 <mat-toolbar style="background-color: darkblue">
-  <button *ngIf="(user | async)?.uid" mat-icon-button style="color:white">
-    <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+  <button *ngIf="(user | async)?.uid && userType === 'Admin'" mat-icon-button style="color:white">
+    <mat-icon  (click)="sidenav.toggle()">menu</mat-icon>
   </button>
   <h1 style="color:white">&nbsp;&nbsp;&nbsp;&nbsp;AppX Device Manager</h1>
   <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs style="color:white">
@@ -27,15 +27,15 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav>
     <mat-nav-list>
-      <a mat-list-item [routerLink]="'/user-list'" (click)="sidenav.Close()">
+      <a *ngIf="userType === 'Admin'" mat-list-item [routerLink]="'/user-list'" (click)="sidenav.Close()">
         Users
       </a>
-      <a mat-list-item [routerLink]="'/device-list'" (click)="sidenav.Close()">
+      <a *ngIf="userType === 'Admin'" mat-list-item [routerLink]="'/device-list'" (click)="sidenav.Close()">
         View Devices
       </a>
-      <a mat-list-item [routerLink]="'/user-home'" (click)="sidenav.Close()">
+     <!--<a mat-list-item [routerLink]="'/user-home'" (click)="sidenav.Close()">
         Assigned Devices
-      </a>
+      </a>--> 
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

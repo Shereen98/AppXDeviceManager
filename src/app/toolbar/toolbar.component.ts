@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
 import { UserService } from "../shared/user.service";
-import { AngularFireList, AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireList, AngularFireDatabase } from "@angular/fire/database";
 
 @Component({
   selector: "app-toolbar",
@@ -31,8 +31,8 @@ export class ToolbarComponent implements OnInit {
           ...item.payload.val()
         };
       });
-       return array;
     });
+    this.userType = JSON.parse(localStorage.getItem("userType"));
   }
 
   /* calls the signOut function from the user.service  */

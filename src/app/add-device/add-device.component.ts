@@ -92,6 +92,10 @@ export class AddDeviceComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  onFileSelected(event){
+    this.selectedImage = event.target.files[0];
+  }
+
   /* uploads the image to the firebase storage */
   onUpload(event) {
     const id = Math.random()

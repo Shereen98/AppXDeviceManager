@@ -13,12 +13,16 @@ form.normal-form {
   /*margin-left:34%;
    margin-right:10%;*/
 }
-
-.controle-container {
-  width: 100px;
-  padding: 10%;
+.controles-container{
+  background-color: lightgray;
+  margin-top: 5%;
+  border-radius:15px;
 }
 
-.controle-container > * {
-  width: 100%;
+
+mat-form-field{
+  padding-right:5%;
+  padding-left:5%;
+ 
 }
+

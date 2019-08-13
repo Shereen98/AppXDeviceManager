@@ -12,19 +12,22 @@ import { UserListComponent } from "./user-list/user-list.component";
 import { DeviceDetailsComponent } from "./device-details/device-details.component";
 import { UserHomeComponent } from "./user-home/user-home.component";
 import { AddReviewComponent } from "./add-review/add-review.component";
+import { AuthGuard } from './shared/auth.guard';
+import { UserTypeGuard } from './shared/user-type.guard';
+import { NormalUserGuard } from './shared/normal-user.guard';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
-  { path: "add-device", component: AddDeviceComponent },
-  { path: "assign-device", component: AssignDeviceComponent },
-  { path: "return-device", component: ReturnDeviceComponent },
-  { path: "toolbar", component: ToolbarComponent },
-  { path: "edit-condition", component: EditConditionComponent },
-  { path: "user-list", component: UserListComponent },
-  { path: "device-list/:deviceKey", component: DeviceDetailsComponent },
-  { path: "device-list", component: DeviceListComponent },
-  { path: "user-home", component: UserHomeComponent },
-  { path: "add-review", component: AddReviewComponent },
+  { path: "add-device", component: AddDeviceComponent,canActivate:[AuthGuard,UserTypeGuard]},
+  { path: "assign-device", component: AssignDeviceComponent,canActivate:[AuthGuard,UserTypeGuard]},
+  { path: "return-device", component: ReturnDeviceComponent,canActivate:[AuthGuard]},
+  { path: "toolbar", component: ToolbarComponent, canActivate: [AuthGuard]},
+  { path: "edit-condition", component: EditConditionComponent,canActivate:[AuthGuard]},
+  { path: "user-list", component: UserListComponent ,canActivate:[AuthGuard,UserTypeGuard]},
+  { path: "device-list/:deviceKey", component: DeviceDetailsComponent,canActivate:[AuthGuard,UserTypeGuard]},
+  { path: "device-list", component: DeviceListComponent,canActivate:[AuthGuard,UserTypeGuard]},
+  { path: "user-home", component: UserHomeComponent,canActivate:[AuthGuard,NormalUserGuard]},
+  { path: "add-review", component: AddReviewComponent,canActivate:[AuthGuard]},
   { path: "", redirectTo: "/login", pathMatch: "full" }
 ];
 

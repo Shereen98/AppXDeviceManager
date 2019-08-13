@@ -62,7 +62,7 @@ export class DeviceListComponent implements OnInit {
 
   /* concatenates all the objects in the list data and concerts them into lower case */
   applyFilter() {
-    this.listData.filter = this.searchKey.trim().toLowerCase();
+    this.listData.filter = this.searchKey ? this.searchKey.trim().toLowerCase() : null;
   }
 
   /* opens up the dialog box /pop up which contains the form to add details of a device */
